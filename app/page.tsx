@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -21,8 +23,6 @@ import {
   RightContent,
   SearchBox,
   SortTag,
-  TimeLabel,
-  TopLabel,
   TotalToken,
   WrapperRight,
 } from "./styled";
@@ -31,6 +31,7 @@ import useIsMobile from "./hooks/useIsMobile";
 import { Chart, IconSearch, World } from "@/public/elements/icon";
 import HowItWorks from "./components/HowItWorks";
 import Marquee from "react-fast-marquee";
+import { useRouter } from "next/navigation";
 
 const { Content } = Layout;
 
@@ -82,6 +83,7 @@ type TopInfoCache = {
 };
 
 export default function Dashboard() {
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [tokens, setTokens] = useState([]);
   const [top, setTop] = useState<TopInfoCache | undefined>(undefined);
@@ -147,7 +149,7 @@ export default function Dashboard() {
     console.log(pageSize, current);
   };
   return (
-    <Layout>
+    <div className="min-h-screen bg-[#222222]">
       <div className="sticky top-0 z-100 items-center flex justify-center bg-[#222222] py-2">
         <div className="md:w-4/5 w-full p-2">
           <Row>
@@ -164,8 +166,8 @@ export default function Dashboard() {
 
             {isMobile && (
               <Col span={12} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => setShowModal(true)}>
-                  How it works
+                <ButtonGuide onClick={() => router.push('/create-token')}>
+                CREATE TOKEN
                 </ButtonGuide>
               </Col>
             )}
@@ -184,7 +186,7 @@ export default function Dashboard() {
 
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => setShowModal(true)} >
+                <ButtonGuide onClick={() => router.push('/create-token')}>
                   <span className="font-bold">CREATE TOKEN</span>
                 </ButtonGuide>
               </Col>
@@ -201,17 +203,19 @@ export default function Dashboard() {
                 <div key={index} className="mr-4 text-white">
                   <Link href={`/token/${token.contractAddress}`}>
                     <span
-                      className={`${index === 0 && "text-yellow-500"
-                        } mr-1 font-semibold`}
+                      className={`${
+                        index === 0 && "text-yellow-500"
+                      } mr-1 font-semibold`}
                     >
                       {index + 1}.
                     </span>
                     <span className="mr-1 font-semibold">{token.symbol}</span>
                     <span
-                      className={`${token.priceChange > 0
-                        ? "text-green-500"
-                        : "text-red-500"
-                        }`}
+                      className={`${
+                        token.priceChange > 0
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
                     >
                       {token.priceChange}%
                     </span>
@@ -220,16 +224,15 @@ export default function Dashboard() {
               ))}
             </Marquee>
           </div>
+          <div className="flex justify-between w-full">
+            <div className="w-1/2 flex justify-between">
+              <div>
+                <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate">
+                  {top && top?.totalToken} tokens deployed
+                </TotalToken>
+              </div>
 
-          <Row>
-            <Col span={12} md={6}>
-              <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate">
-                {top && top?.totalToken} tokens deployed
-              </TotalToken>
-            </Col>
-
-            <Col span={12} md={6}>
-              <Row justify="space-between">
+              <div className="flex gap-2 items-center">
                 <SortTag
                   isActive={sort == "desc"}
                   className="text-white cursor-pointer text-base font-semibold truncate"
@@ -241,33 +244,36 @@ export default function Dashboard() {
                 <SortTag
                   isActive={sort == "asc"}
                   className="text-white cursor-pointer text-base font-semibold truncate"
-                  span={11}
+                  span={12}
                   onClick={() => setSort("asc")}
                 >
                   Oldest First
                 </SortTag>
-              </Row>
-            </Col>
-
-            {/* <SortTag
-            isActive={false}
-            className="text-black text-lg font-bold hidden"
-            span={6}
-            md={4}
-          >
-            {" "}
-            All types
-          </SortTag>
-          {!isMobile && (
-            <SortTag
-              isActive={false}
-              className="text-black text-lg font-bold"
-              span={4}
-            >
-              Proxy only
-            </SortTag>
-          )} */}
-          </Row>
+              </div>
+            </div>
+            {!isMobile && (
+              <div className="w-1/2 flex justify-end">
+                <div className="flex items-center gap-2">
+                  <SortTag
+                    isActive={sort == "desc"}
+                    className="text-white cursor-pointer text-base font-semibold truncate"
+                    span={12}
+                    onClick={() => setSort("desc")}
+                  >
+                    Top Daily
+                  </SortTag>
+                  <SortTag
+                    isActive={sort == "asc"}
+                    className="text-white cursor-pointer text-base font-semibold truncate"
+                    span={12}
+                    onClick={() => setSort("asc")}
+                  >
+                    Top Gainer
+                  </SortTag>
+                </div>
+              </div>
+            )}
+          </div>
           <Row justify="space-between" className="md:mt-5 mt-2">
             <Col span={24} md={14}>
               <ListItem>
@@ -408,30 +414,24 @@ export default function Dashboard() {
                   </>
                 ))}
               </ListItem>
-              <div className="flex md:justify-start justify-center mt-2 md:mt-8">
+              <div className="flex flex-col md:justify-start justify-center mt-2 md:mt-8">
                 {tokens.length > 0 && (
                   <CustomPagination
                     total={top && top?.totalToken}
                     defaultCurrent={1}
                     onChange={onChangePage}
                     pageSize={10}
+                    showSizeChanger={false}
                   />
                 )}
-              </div>
+                <span className="text-white text-[px] pt-3 pl-10">Copyright © CZAgent.io</span>
+              </div> 
             </Col>
 
             {!isMobile && (
               <Col span={24} md={10}>
                 <WrapperRight>
                   <RightContent>
-                    <Row justify="space-between">
-                      <TopLabel className="text-lg font-bold">
-                        Top Daily
-                      </TopLabel>
-                      <TimeLabel className="text-lg font-normal">
-                        24 hours
-                      </TimeLabel>
-                    </Row>
                     {top?.top.map((token: TokenData, index) => (
                       <BoxContent isFirst={index == 0} key={index}>
                         <Link href={`/token/${token.contractAddress}`}>
@@ -450,10 +450,11 @@ export default function Dashboard() {
                                 {token.symbol}
                               </div>
                               <div
-                                className={`text-lg ${token.priceChange >= 0
-                                  ? "text-[#24B600]"
-                                  : "text-[#ed0e4a]"
-                                  } font-bold`}
+                                className={`text-lg ${
+                                  token.priceChange >= 0
+                                    ? "text-[#24B600]"
+                                    : "text-[#ed0e4a]"
+                                } font-bold`}
                               >
                                 {token.priceChange > 0 ? "+" : ""}
                                 {token.priceChange.toLocaleString()}%{" "}
@@ -490,9 +491,7 @@ export default function Dashboard() {
         </div>
       </Content>
 
-
-
       <HowItWorks showModal={showModal} setShowModal={setShowModal} />
-    </Layout>
+    </div>
   );
 }

@@ -47,7 +47,7 @@ export const Address = styled.p`
 `;
 
 export const TotalToken = styled.div`
-  background-color: #ffcc00;
+  background-color: #FFCC00;
   border-color: #00000;
   border-radius: 16px;
   border: 0.81px solid;
