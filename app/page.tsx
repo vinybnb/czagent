@@ -3,20 +3,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { Row, Col, Layout, PaginationProps, Tooltip } from "antd";
+import { Row, Col, Layout, PaginationProps, Avatar } from "antd";
 import moment from "moment";
 
 import { getFirstAndLastString } from "./utils/helper";
 import Image from "next/image";
 import {
   Address,
-  AuthorTag,
   BoxContent,
-  BoxImage,
   BoxPrice,
   ButtonDetail,
   ButtonGuide,
-  CustomAvatar,
   CustomButton,
   CustomPagination,
   InputSearch,
@@ -24,10 +21,7 @@ import {
   RightContent,
   SearchBox,
   SortTag,
-  StyledCard,
   TimeLabel,
-  TimeTag,
-  TokenName,
   TopLabel,
   TotalToken,
   WrapperRight,
@@ -154,7 +148,7 @@ export default function Dashboard() {
   };
   return (
     <Layout>
-      <div className="sticky top-0 z-100 items-center flex justify-center bg-[#001529] py-2">
+      <div className="sticky top-0 z-100 items-center flex justify-center bg-[#222222] py-2">
         <div className="md:w-4/5 w-full p-2">
           <Row>
             <Col span={12} md={4} className="flex justify-start items-center">
@@ -190,7 +184,7 @@ export default function Dashboard() {
 
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => setShowModal(true)}>
+                <ButtonGuide onClick={() => setShowModal(true)} >
                   <span className="font-bold">CREATE TOKEN</span>
                 </ButtonGuide>
               </Col>
@@ -200,26 +194,24 @@ export default function Dashboard() {
       </div>
       <Content className="mt-2 w-full flex justify-center">
         <div className="md:w-4/5 w-full px-2">
-          <div className="px-4 py-1 rounded-md border-2 border-[#868686] mb-2 md:hidden">
+          <div className="px-4 py-1 rounded-md border-2 border-[#868686] mb-2">
             <Marquee>
               {" "}
               {top?.top.map((token: TokenData, index) => (
-                <div key={index} className="mr-4">
+                <div key={index} className="mr-4 text-white">
                   <Link href={`/token/${token.contractAddress}`}>
                     <span
-                      className={`${
-                        index === 0 && "text-yellow-500"
-                      } mr-1 font-semibold`}
+                      className={`${index === 0 && "text-yellow-500"
+                        } mr-1 font-semibold`}
                     >
                       {index + 1}.
                     </span>
                     <span className="mr-1 font-semibold">{token.symbol}</span>
                     <span
-                      className={`${
-                        token.priceChange > 0
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
+                      className={`${token.priceChange > 0
+                        ? "text-green-500"
+                        : "text-red-500"
+                        }`}
                     >
                       {token.priceChange}%
                     </span>
@@ -231,7 +223,7 @@ export default function Dashboard() {
 
           <Row>
             <Col span={12} md={6}>
-              <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-bold truncate">
+              <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate">
                 {top && top?.totalToken} tokens deployed
               </TotalToken>
             </Col>
@@ -259,7 +251,7 @@ export default function Dashboard() {
 
             {/* <SortTag
             isActive={false}
-            className="text-white text-lg font-bold hidden"
+            className="text-black text-lg font-bold hidden"
             span={6}
             md={4}
           >
@@ -269,7 +261,7 @@ export default function Dashboard() {
           {!isMobile && (
             <SortTag
               isActive={false}
-              className="text-white text-lg font-bold"
+              className="text-black text-lg font-bold"
               span={4}
             >
               Proxy only
@@ -277,160 +269,146 @@ export default function Dashboard() {
           )} */}
           </Row>
           <Row justify="space-between" className="md:mt-5 mt-2">
-            <Col span={24} md={12}>
+            <Col span={24} md={14}>
               <ListItem>
                 {tokens.map((token: TokenData, index) => (
-                  <div key={index} style={{ position: "relative" }}>
-                    <Row className="absolute top-[-24px] z-50 w-full">
-                      <AuthorTag
-                        md={5}
-                        span={8}
-                        className="text-lg font-semibold text-center truncate"
-                      >
-                        <Tooltip
-                          title={`${token.usernameDisplay}(@${token.username})`}
-                        >
-                          <span>{token.usernameDisplay}</span>
-                        </Tooltip>
-                      </AuthorTag>
-                      <TimeTag
-                        md={5}
-                        span={8}
-                        className="text-base font-semibold text-center truncate"
-                      >
-                        {moment.unix(token.createdAt / 1000).fromNow()}
-                      </TimeTag>
-                    </Row>
-
-                    <StyledCard
-                      isFirst={index == 0}
-                      className="p-30 mb-10"
+                  <>
+                    <Row
                       key={index}
+                      className="border-t-[1px] border-t-black md:py-3 pt-2 text-white"
                     >
-                      <Row justify="space-between">
-                        <Col md={6}>
-                          <BoxImage isMobile={isMobile}>
-                            <CustomAvatar
+                      <Col span={14}>
+                        <Row>
+                          <Col md={4} span={5}>
+                            <Avatar
                               src={token.image || null}
                               shape="square"
-                              size={isMobile ? 60 : 130}
+                              size={isMobile ? 40 : 70}
                             >
                               {token.symbol}
-                            </CustomAvatar>
-                          </BoxImage>
-                        </Col>
-                        <Col span={18}>
-                          <Row>
-                            <TokenName>
+                            </Avatar>
+                          </Col>
+                          <Col
+                            md={20}
+                            span={19}
+                            className="flex justify-center flex-col"
+                          >
+                            <div className="text-xs md:text-lg font-bold">
                               {token.name} ({token.symbol})
-                            </TokenName>
-                          </Row>
-                          <Row>
-                            <Address>
-                              Address:{" "}
-                              <a
-                                target="_blank"
-                                href={`https://basescan.org/address/${token.contractAddress}`}
-                              >
-                                {getFirstAndLastString(token.contractAddress)}
-                              </a>
-                            </Address>
-                          </Row>
-                          {!isMobile && (
-                            <Row className="mt-8">
-                              <Col span={16}>
-                                <CustomButton
-                                  className="text-[#000] bg-[#A7E5FF] mr-2 md:mr-4 py-2 px-5"
-                                  onClick={() =>
-                                    window.open(token.messageUrl, "_blank")
-                                  }
+                            </div>
+                            <div>
+                              <Address>
+                                Address:{" "}
+                                <a
+                                  target="_blank"
+                                  href={`https://basescan.org/address/${token.contractAddress}`}
+                                >
+                                  {getFirstAndLastString(token.contractAddress)}
+                                </a>
+                              </Address>
+                            </div>
+                          </Col>
+                        </Row>
+                        {!isMobile && (
+                          <Row justify="space-between" className="mt-4">
+                            <Col span={6}>
+                              <CustomButton className="px-2 py-1 rounded-2xl">
+                                <Link
+                                  href={token.messageUrl ?? `/`}
+                                  target="_blank"
                                 >
                                   <div className="flex items-center">
                                     <World />
                                     <span className="ml-2">Website</span>
                                   </div>
-                                </CustomButton>
-                                <CustomButton
-                                  className="bg-[#CDCDCD] text-black py-2 px-5"
-                                  onClick={() =>
-                                    window.open(
-                                      `https://dexscreener.com/base/${token.poolAddress}`,
-                                      "_blank"
-                                    )
-                                  }
-                                >
-                                  <div className="flex items-center">
-                                    <Chart />
-                                    <span className="ml-2">Chart</span>
-                                  </div>
-                                </CustomButton>
-                              </Col>
-
-                              <Col
-                                span={8}
-                                className="flex justify-end truncate"
+                                </Link>
+                              </CustomButton>
+                            </Col>
+                            <Col span={6}>
+                              <CustomButton
+                                className="px-2 py-1 rounded-2xl"
+                                onClick={() =>
+                                  window.open(
+                                    `https://dexscreener.com/base/${token.poolAddress}`,
+                                    "_blank"
+                                  )
+                                }
                               >
-                                <ButtonDetail>
-                                  <Link
-                                    href={`/token/${token.contractAddress}`}
-                                  >
-                                    View Detail
-                                  </Link>
-                                </ButtonDetail>
-                              </Col>
-                            </Row>
-                          )}
-                        </Col>
-                      </Row>
-                      {isMobile && (
-                        <Row style={{ marginTop: isMobile ? "10px" : "32px" }}>
-                          <Col md={6} span={8}>
-                            <CustomButton
-                              className="text-[#000] bg-[#A7E5FF] px-3 py-1"
-                              onClick={() =>
-                                window.open(token.messageUrl, "_blank")
-                              }
+                                <div className="flex items-center">
+                                  <Chart />
+                                  <span className="ml-2">Chart</span>
+                                </div>
+                              </CustomButton>
+                            </Col>
+                            <Col span={12}>
+                              <CustomButton className="py-2 px-3 bg-[#FFCC00] rounded-[20px] text-black">
+                                <Link href={`/token/${token.contractAddress}`}>
+                                  View Detail
+                                </Link>
+                              </CustomButton>
+                            </Col>
+                          </Row>
+                        )}
+                      </Col>
+
+                      <Col span={10} className="justify-center flex-col flex">
+                        <Row className="flex items-center justify-center mb-2">
+                          <div className="text-xs md:text-base px-2 py-1 md:px-5 md:py-2 border-[#5F5F5F] border-[1px]  w-fit rounded-[100px] truncate">
+                            {token.usernameDisplay}
+                          </div>
+                        </Row>
+                        <Row className="flex items-center justify-center">
+                          <div className="text-xs md:text-base px-2 py-1 md:px-5 md:py-2 border-[#5F5F5F] border-[1px]  w-fit rounded-[20px]">
+                            {moment.unix(token.createdAt / 1000).fromNow()}
+                          </div>
+                        </Row>
+                      </Col>
+                    </Row>
+                    {isMobile && (
+                      <Row justify="space-between" className="mb-6 mt-3">
+                        <Col span={6}>
+                          <CustomButton className="rounded-2xl">
+                            <Link
+                              href={token.messageUrl ?? `/`}
+                              target="_blank"
                             >
-                              <div className="flex items-center">
+                              <div className="flex items-center ">
                                 <World />
                                 <span className="ml-2">Website</span>
                               </div>
-                            </CustomButton>
-                          </Col>
-                          <Col md={6} span={8}>
-                            <CustomButton
-                              className="bg-[#CDCDCD] text-black px-3 py-1"
-                              onClick={() =>
-                                window.open(
-                                  `https://dexscreener.com/base/${token.poolAddress}`,
-                                  "_blank"
-                                )
-                              }
-                            >
-                              <div className="flex items-center">
-                                <Chart />
-                                <span className="ml-2">Chart</span>
-                              </div>
-                            </CustomButton>
-                          </Col>
-                          <Col
-                            md={12}
-                            span={8}
-                            className="flex justify-end truncate"
+                            </Link>
+                          </CustomButton>
+                        </Col>
+                        <Col span={6}>
+                          <CustomButton
+                            className="rounded-2xl px-2 py-1"
+                            onClick={() =>
+                              window.open(
+                                `https://dexscreener.com/base/${token.poolAddress}`,
+                                "_blank"
+                              )
+                            }
                           >
-                            <ButtonDetail>
-                              <Link href={`/token/${token.contractAddress}`}>
-                                View Detail
-                              </Link>
-                            </ButtonDetail>
-                          </Col>
-                        </Row>
-                      )}
-                    </StyledCard>
-                  </div>
+                            <div className="flex items-center">
+                              <Chart />
+                              <span className="ml-2">Chart</span>
+                            </div>
+                          </CustomButton>
+                        </Col>
+                        <Col span={10} className="flex justify-end mr-4">
+                          <ButtonDetail>
+                            {" "}
+                            <Link href={`/token/${token.contractAddress}`}>
+                              View Detail
+                            </Link>
+                          </ButtonDetail>
+                        </Col>
+                      </Row>
+                    )}
+                  </>
                 ))}
               </ListItem>
-              <div className="flex justify-center mt-8 w-full md:w-[880px] md:mb-0 mb-3">
+              <div className="flex md:justify-start justify-center mt-2 md:mt-8">
                 {tokens.length > 0 && (
                   <CustomPagination
                     total={top && top?.totalToken}
@@ -472,11 +450,10 @@ export default function Dashboard() {
                                 {token.symbol}
                               </div>
                               <div
-                                className={`text-lg ${
-                                  token.priceChange >= 0
-                                    ? "text-[#24B600]"
-                                    : "text-[#ed0e4a]"
-                                } font-bold`}
+                                className={`text-lg ${token.priceChange >= 0
+                                  ? "text-[#24B600]"
+                                  : "text-[#ed0e4a]"
+                                  } font-bold`}
                               >
                                 {token.priceChange > 0 ? "+" : ""}
                                 {token.priceChange.toLocaleString()}%{" "}
@@ -513,38 +490,7 @@ export default function Dashboard() {
         </div>
       </Content>
 
-      <div className="w-full justify-end flex p-2">
-        <div className="flex w-32 md:w-[250px] justify-between">
-          <a href="https://t.me/tokenfather_global" target="_blank">
-            <img
-              src="images/logo/logoTele.svg"
-              alt="logo tele"
-              className="md:w-[52px] md:h-[52px] w-[30px] h-[30px]"
-            />
-          </a>
-          <a href="https://warpcast.com/tokenfather" target="_blank">
-            <img
-              src="images/logo/logoWarpcast.svg"
-              alt="logo warpcast"
-              className="md:w-[52px] md:h-[52px] w-[30px] h-[30px]"
-            />
-          </a>
-          <a href="https://tokenfather.io/" target="_blank">
-            <img
-              src="images/logo/logoWeb.svg"
-              alt="logo web"
-              className="md:w-[52px] md:h-[52px] w-[30px] h-[30px]"
-            />
-          </a>
-          <a href="https://x.com/tokenfatherx" target="_blank">
-            <img
-              src="images/logo/logoX.svg"
-              alt="logo X"
-              className="md:w-[52px] md:h-[52px] w-[30px] h-[30px]"
-            />
-          </a>
-        </div>
-      </div>
+
 
       <HowItWorks showModal={showModal} setShowModal={setShowModal} />
     </Layout>

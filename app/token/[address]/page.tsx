@@ -9,7 +9,7 @@ import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
 // import { getFirstAndLastString } from '@/app/utils/helper';
-import { Address, BoxInfo, ButtonGuide, CustomButton } from "@/app/styled";
+import { Address, BoxInfo, ButtonGuide, CustomButton, InputSearch, SearchBox } from "@/app/styled";
 import useIsMobile from "@/app/hooks/useIsMobile";
 import { TokenData } from "@/app/page";
 import {
@@ -17,6 +17,7 @@ import {
   IconBuySell,
   IconChartBtn,
   IconInfo,
+  IconSearch,
   World,
 } from "@/public/elements/icon";
 import { getFirstAndLastString } from "@/app/utils/helper";
@@ -33,6 +34,8 @@ export default function TokenPage() {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   // const [cap, setCap] = useState(0);
+  const [search, setSearch] = useState("");
+
   const params = useParams();
   console.log("params", params);
   useEffect(() => {
@@ -63,7 +66,7 @@ export default function TokenPage() {
 
   return (
     <Layout>
-      <div className="sticky top-0 z-100 items-center flex justify-center bg-[#001529] py-2">
+      <div className="sticky top-0 z-100 items-center flex justify-center bg-[#222222] py-2">
         <div className="md:w-4/5 w-full p-2">
           <Row>
             <Col span={12} md={4} className="flex justify-start items-center">
@@ -84,11 +87,23 @@ export default function TokenPage() {
                 </ButtonGuide>
               </Col>
             )}
+            {!isMobile && <Col span={24} md={16}>
+              <SearchBox>
+                <IconSearch />
+                <InputSearch
+                  type="text"
+                  width="100%"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by token name, symbol or requestor ...."
+                />
+              </SearchBox>
+            </Col>}
 
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => setShowModal(true)}>
-                  How it works
+                <ButtonGuide onClick={() => setShowModal(true)} >
+                  <span className="font-bold">CREATE TOKEN</span>
                 </ButtonGuide>
               </Col>
             )}
@@ -103,7 +118,7 @@ export default function TokenPage() {
         }}
       >
         {token ? (
-          <Row gutter={8} className="md:flex hidden">
+          <Row gutter={8} className="md:flex hidden text-white">
             <Col span={16}>
               <div>
                 <iframe
@@ -138,8 +153,8 @@ export default function TokenPage() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-2">
-                  <CustomButton className="px-4 py-2 bg-[#A7E5FF]">
+                <div className="mt-2 text-white">
+                  <CustomButton className="px-4 py-2 rounded-2xl">
                     <Link href={token.messageUrl ?? `/`} target="_blank">
                       <div className="flex items-center">
                         <World />
@@ -148,7 +163,7 @@ export default function TokenPage() {
                     </Link>
                   </CustomButton>
                   <CustomButton
-                    className="ml-4 px-4 py-2"
+                    className="ml-4 px-4 py-2 rounded-2xl"
                     onClick={() =>
                       window.open(
                         `https://dexscreener.com/base/${token.poolAddress}`,
@@ -311,7 +326,7 @@ export default function TokenPage() {
                     </div>
                   </div>
                   <div className="mt-2">
-                    <CustomButton className="px-4 py-2 bg-[#A7E5FF]">
+                    <CustomButton className="px-4 py-2 bg-[#A7E5FF] rounded-2xl">
                       <Link href={token.messageUrl ?? `/`} target="_blank">
                         <div className="flex items-center">
                           <World />
@@ -320,7 +335,7 @@ export default function TokenPage() {
                       </Link>
                     </CustomButton>
                     <CustomButton
-                      className="ml-4 px-4 py-2"
+                      className="ml-4 px-4 py-2 rounded-2xl"
                       onClick={() =>
                         window.open(
                           `https://dexscreener.com/base/${token.poolAddress}`,
@@ -339,11 +354,10 @@ export default function TokenPage() {
             </div>
           )}
 
-          <Row className="w-full justify-between bg-[#BEFF6C] border-2 border-black rounded-xl px-4 py-2 mt-2">
+          <Row className="w-full justify-between bg-[#FFCC00] border-2 border-black rounded-xl px-4 py-2 mt-2">
             <button
-              className={`text-base font-semibold px-2 py-1 ${
-                item === "buy/sell" && "shadow-[2.64px_2.64px_0px_#000000]"
-              } border-black rounded-xl border-2`}
+              className={`text-base font-semibold px-2 py-1 ${item === "buy/sell" && "shadow-[2.64px_2.64px_0px_#000000]"
+                } border-black rounded-xl border-2`}
               onClick={() => onChange("buy/sell")}
             >
               <div className="flex items-center">
@@ -354,9 +368,8 @@ export default function TokenPage() {
               </div>
             </button>
             <button
-              className={`text-base font-semibold px-2 py-1 ${
-                item === "chart" && "shadow-[2.64px_2.64px_0px_#000000]"
-              } border-black rounded-xl border-2`}
+              className={`text-base font-semibold px-2 py-1 ${item === "chart" && "shadow-[2.64px_2.64px_0px_#000000]"
+                } border-black rounded-xl border-2`}
               onClick={() => onChange("chart")}
             >
               <div className="flex items-center">
@@ -367,9 +380,8 @@ export default function TokenPage() {
               </div>
             </button>
             <button
-              className={`text-base font-semibold px-2 py-1 ${
-                item === "info" && "shadow-[2.64px_2.64px_0px_#000000]"
-              } border-black rounded-xl border-2`}
+              className={`text-base font-semibold px-2 py-1 ${item === "info" && "shadow-[2.64px_2.64px_0px_#000000]"
+                } border-black rounded-xl border-2`}
               onClick={() => onChange("info")}
             >
               <div className="flex items-center">

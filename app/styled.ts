@@ -5,7 +5,7 @@ export const StyledCard = styled.div<{ isFirst: boolean }>`
   padding: 24px 24px;
   border: solid 2px #000;
   border-radius: 15px;
-  background-color: #d6eeff;
+  background-color: #222222;
   width: 100%;
   box-shadow: ${(props) =>
     props.isFirst ? "6.64px 6.64px 0px #000000" : "none"};
@@ -47,7 +47,7 @@ export const Address = styled.p`
 `;
 
 export const TotalToken = styled.div`
-  background-color: #FFCC00;
+  background-color: #ffcc00;
   border-color: #00000;
   border-radius: 16px;
   border: 0.81px solid;
@@ -57,11 +57,10 @@ export const TotalToken = styled.div`
 export const SortTag = styled(Col)<{ isActive: boolean }>`
   padding: 10px 26px;
   background-color: ${(props) => (props.isActive ? "#222222" : "#454545")};
-  color: ${(props) => (props.isActive ? "#ffff" : "#969696")};
-  border-color: #00000;
   border-radius: 16px;
-  border: 0.81px solid;
-  box-shadow: 3.64px 3.64px 0px #000000;
+  border: 0.81px solid #5f5f5f;
+  box-shadow: ${(props) =>
+    props.isActive ? "3.64px 3.64px 0px #5f5f5f" : "none"};
   justify-content: center;
   align-items: center;
   display: flex;
@@ -76,7 +75,7 @@ export const AuthorTag = styled(Col)`
   padding: 4px 8px;
   box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
-  background-color: #beff6c;
+  background-color: #ffcc00;
   border-radius: 4px;
   margin-right: 8px;
 
@@ -90,7 +89,7 @@ export const TimeTag = styled(Col)`
   padding: 4px 0px;
   box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
-  background-color: #beff6c;
+  background-color: #ffcc00;
   border-radius: 4px;
 
   @media (max-width: 768px) {
@@ -104,19 +103,18 @@ export const SearchBox = styled.div`
   display: flex;
   align-items: center;
   height: 52px;
-  background-color: white;
   box-shadow: 2.64px 2.64px 0px #000000;
   border-radius: 12.32px;
-  border-color: #0e0e0e;
-  border: 2.86px solid;
+  border: 2.86px solid #000000;
+  background-color: #454545;
 `;
 
 export const ButtonGuide = styled.button`
-  background-color: #FFCC00;
+  background-color: #ffcc00;
   box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
   border-radius: 15px;
-  color: #000000;
+  color: #000;
   height: 100%;
   padding: 0 20px;
   font-weight: 600;
@@ -124,8 +122,10 @@ export const ButtonGuide = styled.button`
 `;
 
 export const WrapperRight = styled.div`
+  margin-left: 20px;
   overflow-y: scroll;
-  max-height: calc(100vh - 300px);
+  max-height: calc(100vh - 280px);
+
   &::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -148,7 +148,7 @@ export const WrapperRight = styled.div`
 
 export const RightContent = styled.div`
   margin-right: 20px;
-  background-color: #7A7A7A;
+  background-color: #333;
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 14.32px;
@@ -158,7 +158,7 @@ export const RightContent = styled.div`
 
 export const TopLabel = styled.div`
   padding: 12px 42px;
-  background-color: #beff6c;
+  background-color: #ffcc00;
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 10.32px;
@@ -174,7 +174,7 @@ export const TimeLabel = styled.div`
 `;
 
 export const BoxContent = styled.div<{ isFirst: boolean }>`
-  background-color: ${(props) => (props.isFirst ? " #474747" : "#fff")};
+  background-color: #333;
   border: 2px solid;
   border-color: #000000;
   border-radius: 18px;
@@ -182,17 +182,18 @@ export const BoxContent = styled.div<{ isFirst: boolean }>`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  color: ${(props) => (props.isFirst ? "#ffff" : "#7A7A7A")};
+  color: #7a7a7a;
 `;
 
 export const BoxPrice = styled.div<{ isFirst: boolean }>`
- background-color: ${(props) => (props.isFirst ? "#FFCC00" : "#fff")};
+ background-color: ${(props) => (props.isFirst ? "#FFCC00" : "#000")};
   width: 100%
   height: 69px;
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 10.32px;
   box-shadow: 4.64px 4.64px 0px #000000;
+  color: ${(props) => (props.isFirst ? "#000" : "#fff")}
 `;
 
 export const CardInfo = styled.div`
@@ -206,8 +207,7 @@ export const CardInfo = styled.div`
   }
 `;
 export const ListItem = styled.div`
-  padding-top: 23px;
-  max-height: calc(100vh - 300px);
+  max-height: calc(100vh - 280px);
   overflow-y: auto;
   padding-right: 20px;
 
@@ -249,13 +249,13 @@ export const TextColor = styled.p<{ value: number }>`
 export const CustomPagination = styled(Pagination)`
   .ant-pagination-item {
     border: 2px solid #7a7a7a;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     color: #7a7a7a;
     font-weight: 400;
 
     &.ant-pagination-item-active {
       border-color: #000000;
-      background-color: #FFCC00;
+      background-color: #ffcc00;
       & a {
         color: #000000;
         font-weight: 600;
@@ -267,7 +267,6 @@ export const CustomPagination = styled(Pagination)`
 export const CustomButton = styled.button`
   border: 2.86px solid;
   border-color: #0e0e0e;
-  border-radius: 15px;
   font-weight: 600;
   font-size: 16px;
   box-shadow: 2.64px 2.64px 0px #5f5f5f;
@@ -302,6 +301,7 @@ export const InputSearch = styled.input`
   width: 70%;
   height: 42px;
   margin-left: 16px;
+  background-color: #454545;
   &:focus {
     outline: none;
     border: none;
@@ -315,5 +315,5 @@ export const BoxInfo = styled.div`
   border: 2.86px solid;
   border-color: #000000;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: #333;
 `;

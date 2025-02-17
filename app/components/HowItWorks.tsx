@@ -23,7 +23,7 @@ const HowItWorks = ({ showModal, setShowModal }: Props) => {
       footer={() => (
         <div className="w-full flex justify-center">
           <CustomButton
-            className="bg-[#BEFF6C] px-8 py-2 rounded-xl"
+            className="bg-[#FFCC00] px-8 py-2 rounded-xl"
             onClick={() => setShowModal(false)}
           >
             Close

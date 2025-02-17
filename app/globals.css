@@ -13,7 +13,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #d6eeff;
+    --background: #222222;
     --foreground: #e0e0e0;
     --primary: #8ab4f8;
     --secondary: #ff80ab;
@@ -29,7 +29,7 @@ body {
 }
 
 .ant-layout {
-  background-color: #d6eeff;
+  background-color: #222222;
   height: 100vh;
 
   @media (max-width: 768px) {
