@@ -47,7 +47,7 @@ export const Address = styled.p`
 `;
 
 export const TotalToken = styled.div`
-  background-color: #ffcc00;
+  background-color: #FFCC00;
   border-color: #00000;
   border-radius: 16px;
   border: 0.81px solid;
@@ -56,7 +56,8 @@ export const TotalToken = styled.div`
 
 export const SortTag = styled(Col)<{ isActive: boolean }>`
   padding: 10px 26px;
-  background-color: ${(props) => (props.isActive ? "#3366FF" : "#96CAFF")};
+  background-color: ${(props) => (props.isActive ? "#222222" : "#454545")};
+  color: ${(props) => (props.isActive ? "#ffff" : "#969696")};
   border-color: #00000;
   border-radius: 16px;
   border: 0.81px solid;
@@ -111,11 +112,11 @@ export const SearchBox = styled.div`
 `;
 
 export const ButtonGuide = styled.button`
-  background-color: #fff;
+  background-color: #FFCC00;
   box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
   border-radius: 15px;
-  color: #000;
+  color: #000000;
   height: 100%;
   padding: 0 20px;
   font-weight: 600;
@@ -174,7 +175,7 @@ export const TimeLabel = styled.div`
 `;
 
 export const BoxContent = styled.div<{ isFirst: boolean }>`
-  background-color: ${(props) => (props.isFirst ? " #e7f7d3" : "#fff")};
+  background-color: ${(props) => (props.isFirst ? " #474747" : "#fff")};
   border: 2px solid;
   border-color: #000000;
   border-radius: 18px;
@@ -185,13 +186,14 @@ export const BoxContent = styled.div<{ isFirst: boolean }>`
 `;
 
 export const BoxPrice = styled.div<{ isFirst: boolean }>`
- background-color: ${(props) => (props.isFirst ? "#beff6c" : "#fff")};
+ background-color: ${(props) => (props.isFirst ? "#FFCC00" : "#fff")};
   width: 100%
   height: 69px;
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 10.32px;
   box-shadow: 4.64px 4.64px 0px #000000;
+  color: ${(props) => (props.isFirst ? "#fff" : "#7A7A7A")};
 `;
 
 export const CardInfo = styled.div`
@@ -248,13 +250,13 @@ export const TextColor = styled.p<{ value: number }>`
 export const CustomPagination = styled(Pagination)`
   .ant-pagination-item {
     border: 2px solid #7a7a7a;
-    background-color: #d9d9d9;
+    background-color: #D9D9D9;
     color: #7a7a7a;
     font-weight: 400;
 
     &.ant-pagination-item-active {
       border-color: #000000;
-      background-color: #beff6c;
+      background-color: #FFCC00;
       & a {
         color: #000000;
         font-weight: 600;

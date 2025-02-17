@@ -191,7 +191,7 @@ export default function Dashboard() {
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
                 <ButtonGuide onClick={() => setShowModal(true)}>
-                  How it works
+                  <span className="font-bold">CREATE TOKEN</span>
                 </ButtonGuide>
               </Col>
             )}
@@ -231,7 +231,7 @@ export default function Dashboard() {
 
           <Row>
             <Col span={12} md={6}>
-              <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate">
+              <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-bold truncate">
                 {top && top?.totalToken} tokens deployed
               </TotalToken>
             </Col>
