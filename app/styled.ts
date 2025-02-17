@@ -126,7 +126,6 @@ export const ButtonGuide = styled.button`
 export const WrapperRight = styled.div`
   overflow-y: scroll;
   max-height: calc(100vh - 300px);
-
   &::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -149,7 +148,7 @@ export const WrapperRight = styled.div`
 
 export const RightContent = styled.div`
   margin-right: 20px;
-  background-color: #ffffff;
+  background-color: #7A7A7A;
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 14.32px;
@@ -183,6 +182,7 @@ export const BoxContent = styled.div<{ isFirst: boolean }>`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
+  color: ${(props) => (props.isFirst ? "#ffff" : "#7A7A7A")};
 `;
 
 export const BoxPrice = styled.div<{ isFirst: boolean }>`
@@ -193,7 +193,6 @@ export const BoxPrice = styled.div<{ isFirst: boolean }>`
   border-color: #0e0e0e;
   border-radius: 10.32px;
   box-shadow: 4.64px 4.64px 0px #000000;
-  color: ${(props) => (props.isFirst ? "#fff" : "#7A7A7A")};
 `;
 
 export const CardInfo = styled.div`
