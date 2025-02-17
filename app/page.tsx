@@ -161,8 +161,8 @@ export default function Dashboard() {
               <Link href="/">
                 <Image
                   src="/images/logo/logo.png"
-                  width={188}
-                  height={50}
+                  width={80}
+                  height={80}
                   alt="logo"
                 />
               </Link>
