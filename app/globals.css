@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #ffffff;
+  --primary: #1a73e8;
+  --secondary: #ff4081;
+  --accent: #00bcd4;
+  --muted: #757575;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #d6eeff;
+    --foreground: #e0e0e0;
+    --primary: #8ab4f8;
+    --secondary: #ff80ab;
+    --accent: #80deea;
+    --muted: #bdbdbd;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ant-layout {
+  background-color: #d6eeff;
+  height: 100vh;
+
+  @media (max-width: 768px) {
+    height: 1000%;
+  }
+}
