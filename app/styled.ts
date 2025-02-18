@@ -1,3 +1,5 @@
+/** @format */
+
 import { Avatar, Col, Pagination } from "antd";
 import styled from "styled-components";
 
@@ -47,7 +49,7 @@ export const Address = styled.p`
 `;
 
 export const TotalToken = styled.div`
-  background-color: #FFCC00;
+  background-color: #ffcc00;
   border-color: #00000;
   border-radius: 16px;
   border: 0.81px solid;
@@ -175,14 +177,21 @@ export const TimeLabel = styled.div`
 
 export const BoxContent = styled.div<{ isFirst: boolean }>`
   background-color: #333;
-  border: 2px solid;
-  border-color: #000000;
+  border: 2px solid #000000;
   border-radius: 18px;
   height: 166px;
   width: 100%;
   padding: 10px;
   margin-top: 10px;
   color: #7a7a7a;
+
+  transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+  &:hover {
+    border-color: #ffcc00;
+    transform: scaleX(0.95);
+    cursor: pointer;
+  }
 `;
 
 export const BoxPrice = styled.div<{ isFirst: boolean }>`
@@ -210,7 +219,6 @@ export const ListItem = styled.div`
   max-height: calc(100vh - 280px);
   overflow-y: auto;
   padding-right: 20px;
-
   &::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -280,7 +288,7 @@ export const CustomButton = styled.button`
 
 export const ButtonDetail = styled.button`
   padding: 8px 20px;
-  background-color: #ffffff;
+  background-color:#FFCC00;
   color: #000 !important;
   border: 2px solid;
   border-color: #000000;

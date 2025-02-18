@@ -154,20 +154,23 @@ export default function Dashboard() {
         <div className="md:w-4/5 w-full p-2">
           <Row>
             <Col span={12} md={4} className="flex justify-start items-center">
-              <Link href="/">
+              <Link href="/" className="flex items-center gap-3">
                 <Image
                   src="/images/logo/logo.png"
                   width={60}
                   height={60}
                   alt="logo"
                 />
+                <span className="text-white font-bold text-xl">CZ AGENTS</span>
               </Link>
             </Col>
 
             {isMobile && (
               <Col span={12} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => router.push('/create-token')}>
-                CREATE TOKEN
+                <ButtonGuide
+                  onClick={() => router.push("https://x.com/czagents")}
+                >
+                  CREATE TOKEN
                 </ButtonGuide>
               </Col>
             )}
@@ -186,7 +189,9 @@ export default function Dashboard() {
 
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => router.push('/create-token')}>
+                <ButtonGuide
+                  onClick={() => router.push("https://x.com/czagents")}
+                >
                   <span className="font-bold">CREATE TOKEN</span>
                 </ButtonGuide>
               </Col>
@@ -281,7 +286,7 @@ export default function Dashboard() {
                   <>
                     <Row
                       key={index}
-                      className="border-t-[1px] border-t-black md:py-3 pt-2 text-white"
+                      className=" border-[2px] sm:px-5 px-2 border-[#000]  md:py-3 pt-2 text-white rounded-lg mb-4 shadow transition-transform duration-300 hover:scale-x-95 hover:shadow-lg hover:z-20 cursor-pointer hover:border-[#FFCC00]"
                     >
                       <Col span={14}>
                         <Row>
@@ -357,8 +362,11 @@ export default function Dashboard() {
                         )}
                       </Col>
 
-                      <Col span={10} className="justify-center flex-col flex">
-                        <Row className="flex items-center justify-center mb-2">
+                      <Col
+                        span={10}
+                        className="justify-center items-center gap-2 flex flex-col" 
+                      >
+                        <Row className="flex items-center justify-center">
                           <div className="text-xs md:text-base px-2 py-1 md:px-5 md:py-2 border-[#5F5F5F] border-[1px]  w-fit rounded-[100px] truncate">
                             {token.usernameDisplay}
                           </div>
@@ -369,48 +377,48 @@ export default function Dashboard() {
                           </div>
                         </Row>
                       </Col>
-                    </Row>
-                    {isMobile && (
-                      <Row justify="space-between" className="mb-6 mt-3">
-                        <Col span={6}>
-                          <CustomButton className="rounded-2xl">
-                            <Link
-                              href={token.messageUrl ?? `/`}
-                              target="_blank"
+                      {isMobile && (
+                        <Row justify="space-between" className="mb-6 mt-3 flex items-center gap-2">
+                          <Col span={6} className="mr-3">
+                            <CustomButton className="rounded-2xl px-2 py-1 ">
+                              <Link
+                                href={token.messageUrl ?? `/`}
+                                target="_blank"
+                              >
+                                <div className="flex items-center ">
+                                  <World />
+                                  <span className="ml-2">Website</span>
+                                </div>
+                              </Link>
+                            </CustomButton>
+                          </Col>
+                          <Col span={6} className="flex justify-end">
+                            <CustomButton
+                              className="rounded-2xl px-2 py-1"
+                              onClick={() =>
+                                window.open(
+                                  `https://dexscreener.com/base/${token.poolAddress}`,
+                                  "_blank"
+                                )
+                              }
                             >
-                              <div className="flex items-center ">
-                                <World />
-                                <span className="ml-2">Website</span>
+                              <div className="flex items-center">
+                                <Chart />
+                                <span className="ml-2">Chart</span>
                               </div>
-                            </Link>
-                          </CustomButton>
-                        </Col>
-                        <Col span={6}>
-                          <CustomButton
-                            className="rounded-2xl px-2 py-1"
-                            onClick={() =>
-                              window.open(
-                                `https://dexscreener.com/base/${token.poolAddress}`,
-                                "_blank"
-                              )
-                            }
-                          >
-                            <div className="flex items-center">
-                              <Chart />
-                              <span className="ml-2">Chart</span>
-                            </div>
-                          </CustomButton>
-                        </Col>
-                        <Col span={10} className="flex justify-end mr-4">
-                          <ButtonDetail>
-                            {" "}
-                            <Link href={`/token/${token.contractAddress}`}>
-                              View Detail
-                            </Link>
-                          </ButtonDetail>
-                        </Col>
-                      </Row>
-                    )}
+                            </CustomButton>
+                          </Col>
+                          <Col span={9} className="flex justify-end">
+                          <ButtonDetail className="py-2 px-3 bg-[#FFCC00] rounded-[20px] text-black">
+                              {" "}
+                              <Link href={`/token/${token.contractAddress}`}>
+                                View Detail
+                              </Link>
+                            </ButtonDetail>
+                          </Col>
+                        </Row>
+                      )}
+                    </Row>
                   </>
                 ))}
               </ListItem>
@@ -424,8 +432,10 @@ export default function Dashboard() {
                     showSizeChanger={false}
                   />
                 )}
-                <span className="text-white text-[px] pt-3 pl-10">Copyright © czagents.fun</span>
-              </div> 
+                <span className="text-white text-[px] pt-3 pl-10">
+                  Copyright © czagents.fun
+                </span>
+              </div>
             </Col>
 
             {!isMobile && (
