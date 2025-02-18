@@ -424,7 +424,7 @@ export default function Dashboard() {
                     showSizeChanger={false}
                   />
                 )}
-                <span className="text-white text-[px] pt-3 pl-10">Copyright © CZAgent.io</span>
+                <span className="text-white text-[px] pt-3 pl-10">Copyright © czagents.fun</span>
               </div> 
             </Col>
 
