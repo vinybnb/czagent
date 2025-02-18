@@ -1,51 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /** @format */
 
 "use client";
 
-import { Button, Card, Col, Input, Row, Upload } from "antd";
+import { Col, Input, Row } from "antd";
 import Link from "next/link";
 
 import { IconSearch } from "@/public/elements/icon";
 import Image from "next/image";
 
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import TextArea from "antd/es/input/TextArea";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Marquee from "react-fast-marquee";
 import useIsMobile from "../hooks/useIsMobile";
 import {
   ButtonGuide,
   InputSearch,
   SearchBox,
-  SortTag,
-  TotalToken,
+  TotalToken
 } from "../styled";
-import Marquee from "react-fast-marquee";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import TextArea from "antd/es/input/TextArea";
-
 const CreateTokenComponent = () => {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [tokens, setTokens] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [top, setTop] = useState<any | undefined>(undefined);
-  const [sort, setSort] = useState("desc");
-  const [search, setSearch] = useState("");
   const isMobile = useIsMobile();
-  const fetchTokens = async () => {
-    const response = await axios.post(
-      "https://api.tokenfather.io/tokenfather",
-      {
-        query: search,
-        page: currentPage,
-        chain: 8453,
-        sort,
-      }
-    );
-
-    setTokens(response.data);
-  };
 
   useEffect(() => {
-    fetchTokens();
     const fetchTop = async () => {
       const response = await axios.get(
         "https://api.tokenfather.io/tokenfather/gettop"
@@ -54,7 +34,7 @@ const CreateTokenComponent = () => {
     };
 
     fetchTop();
-  }, [sort, currentPage]);
+  }, []);
   return (
     <>
       <div className="min-h-screen bg-[#222222]">
