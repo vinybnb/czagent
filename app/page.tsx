@@ -286,7 +286,7 @@ export default function Dashboard() {
                   <>
                     <Row
                       key={index}
-                      className=" border-[2px] sm:px-5 px-2 border-[#000]  md:py-3 pt-2 text-white rounded-lg mb-4 shadow transition-transform duration-300 hover:scale-x-95 hover:shadow-lg hover:z-20 cursor-pointer hover:border-[#FFCC00]"
+                      className=" border-[2px] sm:px-5 px-2 border-[#d4ba51]  md:py-3 pt-2 text-white rounded-lg mb-4 shadow transition-transform duration-300 hover:scale-x-95 hover:shadow-lg hover:z-20 cursor-pointer hover:border-[#FFCC00]"
                     >
                       <Col span={14}>
                         <Row>

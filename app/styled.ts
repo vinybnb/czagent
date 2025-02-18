@@ -177,9 +177,9 @@ export const TimeLabel = styled.div`
 
 export const BoxContent = styled.div<{ isFirst: boolean }>`
   background-color: #333;
-  border: 2px solid #000000;
+  border: 2px solid #d4ba51;
   border-radius: 18px;
-  height: 166px;
+  min-height: 166px;
   width: 100%;
   padding: 10px;
   margin-top: 10px;
