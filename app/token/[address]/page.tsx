@@ -222,7 +222,7 @@ export default function TokenPage() {
                     height: "calc(100vh - 300px)",
                     borderRadius: "20px",
                   }}
-                  src={`https://app.uniswap.org/#/swap?exactField=input&outputCurrency=${token?.contractAddress}&chain=base`}
+                  src={`https://pancakeswap.finance/#/swap?exactField=input&outputCurrency=${token?.contractAddress}&chain=base`}
                 />
               </div>
             </Col>
@@ -246,7 +246,7 @@ export default function TokenPage() {
                   height: "calc(100vh - 200px)",
                   borderRadius: "20px",
                 }}
-                src={`https://app.uniswap.org/#/swap?exactField=input&outputCurrency=${token?.contractAddress}&chain=base`}
+                src={`https://pancakeswap.finance/#/swap?exactField=input&outputCurrency=${token?.contractAddress}&chain=base`}
               />
             </div>
           )}
