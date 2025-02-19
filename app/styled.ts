@@ -9,8 +9,6 @@ export const StyledCard = styled.div<{ isFirst: boolean }>`
   border-radius: 15px;
   background-color: #1a1a1a;
   width: 100%;
-  box-shadow: ${(props) =>
-    props.isFirst ? "6.64px 6.64px 0px #000000" : "none"};
   background-color: ${(props) => (props.isFirst ? "#DBFFAE" : "#FFFFFF")};
 
   @media (max-width: 768px) {
@@ -73,7 +71,6 @@ export const SortTag = styled(Col)<{ isActive: boolean }>`
 
 export const AuthorTag = styled(Col)`
   padding: 4px 8px;
-  box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
   background-color: #ffcc00;
   border-radius: 4px;
@@ -87,7 +84,6 @@ export const AuthorTag = styled(Col)`
 
 export const TimeTag = styled(Col)`
   padding: 4px 0px;
-  box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
   background-color: #ffcc00;
   border-radius: 4px;
@@ -103,7 +99,6 @@ export const SearchBox = styled.div`
   display: flex;
   align-items: center;
   height: 52px;
-  box-shadow: 2.64px 2.64px 0px #000000;
   border-radius: 12.32px;
   border: 2.86px solid #000000;
   background-color: #454545;
@@ -111,7 +106,6 @@ export const SearchBox = styled.div`
 
 export const ButtonGuide = styled.button`
   background-color: #ffcc00;
-  box-shadow: 3.64px 3.64px 0px #000000;
   border: 2px solid;
   border-radius: 15px;
   color: #000;
@@ -157,7 +151,6 @@ export const TopLabel = styled.div`
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 10.32px;
-  box-shadow: 4.64px 4.64px 0px #000000;
 `;
 
 export const TimeLabel = styled.div`
@@ -196,7 +189,6 @@ export const CardInfo = styled.div`
   border: 2.86px solid;
   border-color: #0e0e0e;
   border-radius: 10.32px;
-  box-shadow: 6.64px 6.64px 0px #000000;
   background-color: white;
 
   @media (max-width: 768px) {
@@ -264,7 +256,6 @@ export const CustomButton = styled.button`
   border-color: #0e0e0e;
   font-weight: 600;
   font-size: 16px;
-  box-shadow: 2.64px 2.64px 0px #5f5f5f;
   &:hover {
     opacity: 0.7;
   }
@@ -282,7 +273,6 @@ export const ButtonDetail = styled.button`
   border-radius: 8px;
   font-weight: 600;
   font-size: 16px;
-  box-shadow: 2.64px 2.64px 0px #000000;
   &:hover {
     opacity: 0.7;
   }
@@ -306,7 +296,6 @@ export const InputSearch = styled.input`
 export const BoxInfo = styled.div`
   padding: 8px;
   margin-top: 8px;
-  box-shadow: 2.64px 2.64px 0px #000000;
   border: 2.86px solid;
   border-color: #000000;
   border-radius: 12px;
