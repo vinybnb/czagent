@@ -1,4 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * eslint-disable @typescript-eslint/no-explicit-any
+ *
+ * @format
+ */
+
 /** @format */
 
 "use client";
@@ -33,6 +38,7 @@ import { getFirstAndLastString } from "./utils/helper";
 import useDebounce from "./hooks/useDebounce";
 import axios from "axios";
 import { API_ENDPOINT } from "./utils/constants";
+import { defaultData } from "./hooks/data";
 
 export type TokenData = {
   tokenId: string;
@@ -81,248 +87,7 @@ type TopInfoCache = {
   totalToken: number;
   top: TokenData[];
 };
-// const defaultData: any = [
-//   {
-//     tokenId: "0820-31b8-3fd2-c56a",
-//     chain: 8453,
-//     contractAddress: "0xc18caa1658b91076425c8d287ca1b8e238344bfe",
-//     dex: 1,
-//     lastUpdated: 1735717949253,
-//     name: "Broccoli",
-//     poolAddress: "0xc18caa1658b91076425c8d287ca1b8e238344bfe",
-//     price: "0.000002987",
-//     supply: "1000000000",
-//     tags: "warpcast",
-//     userId:
-//       "9049080x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     chainString: "Bsc",
-//     dexString: "Uniswap",
-//     userName: "",
-//     createdAt: 1735631525552,
-//     status: 3,
-//     hash: "0x5ecc204479cae02c21b950c84c910488c7945f20",
-//     signature:
-//       "0x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     timestamp: 126172306,
-//     fid: 904908,
-//     message:
-//       "Broccoli (broccolibnb.org) (BROCCOLI) is a cryptocurrency and operates on the BNB Smart Chain (BEP20) platform. Broccoli (broccolibnb.org) has a current supply of 185,614,848.18793503. The last known price of Broccoli (broccolibnb.org) is 0.15501358 USD and is up 148.64 over the last 24 hours. It is currently trading on 6 active market(s) with $125,175,346.30 traded over the last 24 hours. More information can be found at https://broccolibnb.org/.",
-//     symbol: "BROCCOLI",
-//     image:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0x23d3f4eaaa515403c6765bb623f287a8cca28f2b.png",
-//     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-//     username: "cryptopioneerxyz",
-//     usernameDisplay: "CryptoPioneerXyz",
-//     userPicture:
-//       "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/2026d0ba-46e6-4785-0dd7-ec6b1693bf00/rectcrop3",
-//     messageType: 1,
-//     teleId: 0,
-//     teleMessageId: 0,
-//     teleChannelId: 0,
-//     teleMessageThreadId: 0,
-//     teleResultThreadId: 0,
-//     totalHolder: 1,
-//     marketCap: 2988,
-//     volume24h: 1000000,
-//     priceChange: 10,
-//     replyMessage:
-//       "Congratulations on creating BabyGaisha! Your token is set to embark on a journey to the stars, inspiring new friendships and future possibilities in the crypto universe!\n\nToken page: https://tokenfather.io/token/0x1E41af2f3432669EA095C8E4E6f08fB66cece116",
-//     messageUrl:
-//       "https://warpcast.com/cryptopioneerxyz/0xc18caa1658b91076425c8d287ca1b8e238344bfe",
-//     teleOriginThreadId: 0,
-//   },
-//   {
-//     tokenId: "0810-31b8-3fd2-c56a",
-//     chain: 8453,
-//     contractAddress: "0x1d521bc7b621971183418d3200b1b74a8029e724",
-//     dex: 1,
-//     lastUpdated: 1735717949253,
-//     name: "France Macron",
-//     poolAddress: "0x1d521bc7b621971183418d3200b1b74a8029e724",
-//     price: "0.1",
-//     supply: "1000000000",
-//     tags: "warpcast",
-//     userId:
-//       "9049080x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     chainString: "Bsc",
-//     dexString: "Uniswap",
-//     userName: "",
-//     createdAt: 1735631525552,
-//     status: 3,
-//     hash: "0x5ecc204479cae02c21b950c84c910488c7945f20",
-//     signature:
-//       "0x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     timestamp: 126172306,
-//     fid: 904908,
-//     message: "Vive la blockchain!",
-//     symbol: "FRANCE",
-//     image:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0x6adac9a1fa8c994abb375d2d30f93880c8004f7b.png",
-//     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-//     username: "DegenPioneer",
-//     usernameDisplay: "DegenPioneer",
-//     userPicture:
-//       "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/2026d0ba-46e6-4785-0dd7-ec6b1693bf00/rectcrop3",
-//     messageType: 1,
-//     teleId: 0,
-//     teleMessageId: 0,
-//     teleChannelId: 0,
-//     teleMessageThreadId: 0,
-//     teleResultThreadId: 0,
-//     totalHolder: 1,
-//     marketCap: 2988,
-//     volume24h: 20000,
-//     priceChange: 5,
-//     replyMessage: "Vive la blockchain!",
-//     messageUrl:
-//       "https://warpcast.com/cryptopioneerxyz/0x1d521bc7b621971183418d3200b1b74a8029e724",
-//     teleOriginThreadId: 0,
-//   },
-//   {
-//     tokenId: "0830-31b8-3fd2-c56a",
-//     chain: 8453,
-//     contractAddress: "0x8b4ad896bf0fa37ce639753447ae1442c33aab06",
-//     dex: 1,
-//     lastUpdated: 1735717949253,
-//     name: "Four",
-//     poolAddress: "0x8b4ad896bf0fa37ce639753447ae1442c33aab06",
-//     price: "0.4",
-//     supply: "1000000000",
-//     tags: "warpcast",
-//     userId:
-//       "9049080x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     chainString: "Bsc",
-//     dexString: "Uniswap",
-//     userName: "",
-//     createdAt: 1735631525552,
-//     status: 3,
-//     hash: "0x5ecc204479cae02c21b950c84c910488c7945f20",
-//     signature:
-//       "0x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     timestamp: 126172306,
-//     fid: 904908,
-//     message: "the first meme launched for represent four meme plateform.",
-//     symbol: "FOUR",
-//     image:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xce30b968d5e76a67f3946e0598f95d551ce03ac3.png",
-//     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-//     username: "Web3Visionary",
-//     usernameDisplay: "Web3Visionary",
-//     userPicture:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xce30b968d5e76a67f3946e0598f95d551ce03ac3/header.png",
-//     messageType: 1,
-//     teleId: 0,
-//     teleMessageId: 0,
-//     teleChannelId: 0,
-//     teleMessageThreadId: 0,
-//     teleResultThreadId: 0,
-//     totalHolder: 1,
-//     marketCap: 2988,
-//     volume24h: 243434,
-//     priceChange: 20.8,
-//     replyMessage: "the first meme launched for represent four meme plateform.",
-//     messageUrl:
-//       "https://warpcast.com/cryptopioneerxyz/0x8b4ad896bf0fa37ce639753447ae1442c33aab06",
-//     teleOriginThreadId: 0,
-//   },
-//   {
-//     tokenId: "0840-31b8-3fd2-c56a",
-//     chain: 8453,
-//     contractAddress: "0x07f071aa224e2fc2cf03ca2e6558ec6181d66a90",
-//     dex: 1,
-//     lastUpdated: 1735717949253,
-//     name: "CaptainBNB",
-//     poolAddress: "0x07f071aa224e2fc2cf03ca2e6558ec6181d66a90",
-//     price: "0.4",
-//     supply: "1000000000",
-//     tags: "warpcast",
-//     userId:
-//       "9049080x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     chainString: "Bsc",
-//     dexString: "Uniswap",
-//     userName: "",
-//     createdAt: 1735631525552,
-//     status: 3,
-//     hash: "0x07f071aa224e2fc2cf03ca2e6558ec6181d66a90",
-//     signature:
-//       "0x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     timestamp: 126172306,
-//     fid: 904908,
-//     message:
-//       "CaptainBNB (CaptainBNB) is a cryptocurrency . CaptainBNB has a current supply of 1,000,000,000 with 0 in circulation. The last known price of CaptainBNB is 0.01868055 USD and is down -18.77 over the last 24 hours. It is currently trading on 27 active market(s) with $9,900,341.93 traded over the last 24 hours. More information can be found at https://captainbnb.xyz/.",
-//     symbol: "CaptainBNB",
-//     image: "https://s2.coinmarketcap.com/static/img/coins/64x64/35734.png",
-//     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-//     username: "MetaFiGuru",
-//     usernameDisplay: "MetaFiGuru",
-//     userPicture:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0x47a1eb0b825b73e6a14807beaecafef199d5477c/header.png",
-//     messageType: 1,
-//     teleId: 0,
-//     teleMessageId: 0,
-//     teleChannelId: 0,
-//     teleMessageThreadId: 0,
-//     teleResultThreadId: 0,
-//     totalHolder: 1,
-//     marketCap: 2988,
-//     volume24h: 3456766,
-//     priceChange: 10.05,
-//     replyMessage:
-//       "CaptainBNB (CaptainBNB) is a cryptocurrency . CaptainBNB has a current supply of 1,000,000,000 with 0 in circulation. The last known price of CaptainBNB is 0.01868055 USD and is down -18.77 over the last 24 hours. It is currently trading on 27 active market(s) with $9,900,341.93 traded over the last 24 hours. More information can be found at https://captainbnb.xyz/.",
-//     messageUrl:
-//       "https://warpcast.com/cryptopioneerxyz/0x07f071aa224e2fc2cf03ca2e6558ec6181d66a90",
-//     teleOriginThreadId: 0,
-//   },
-//   {
-//     tokenId: "0850-31b8-3fd2-c56a",
-//     chain: 8453,
-//     contractAddress: "0x70e4978406bf51361ecc04eb26f233c6fce2c5e1",
-//     dex: 1,
-//     lastUpdated: 1735717949253,
-//     name: "FourXBT",
-//     poolAddress: "0x70e4978406bf51361ecc04eb26f233c6fce2c5e1",
-//     price: "0.33",
-//     supply: "1000000000",
-//     tags: "warpcast",
-//     userId:
-//       "9049080x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     chainString: "Bsc",
-//     dexString: "Uniswap",
-//     userName: "",
-//     createdAt: 1735631525552,
-//     status: 3,
-//     hash: "0x07f071aa224e2fc2cf03ca2e6558ec6181d66a90",
-//     signature:
-//       "0x2f9caee04d9876a51fa4e4954ca39db2ef2da0c34f44087957ee9a51b93d952b037f2048fa2fd4c4b863ff50fcb02aeb0450984ef2dd6512408757574162f500",
-//     timestamp: 126172306,
-//     fid: 904908,
-//     message:
-//       "Fourxbt is an advanced, fully autonomous AI-driven blockchain analytics tool tailored for the Web3 ecosystem. It combines cutting-edge AI technology with a user-friendly interface to deliver real-time market insights, analytics, and educational content. Operating seamlessly on Twitter (X) and other platforms, the AI Agent ensures users are informed and equipped to navigate the dynamic world of blockchain and crypto.\r\n\r\nWith 24/7 availability and a direct connection to blockchain networks and news sources, the AI Agent provides an unrivaled blend of precision, efficiency, and privacy. It is designed not just as a passive tool but as an interactive digital assistant that enhances user engagement, from monitoring market trends to answering queries about DeFi and NFTs.",
-//     symbol: "FXBT",
-//     image:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xcab6311f95faf6b5db4fd306092b6bcd9807e8f0.png",
-//     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-//     username: "BlockchainPioneer",
-//     usernameDisplay: "BlockchainPioneer",
-//     userPicture:
-//       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xcab6311f95faf6b5db4fd306092b6bcd9807e8f0/header.png",
-//     messageType: 1,
-//     teleId: 0,
-//     teleMessageId: 0,
-//     teleChannelId: 0,
-//     teleMessageThreadId: 0,
-//     teleResultThreadId: 0,
-//     totalHolder: 1,
-//     marketCap: 2988,
-//     volume24h: 34657,
-//     priceChange: 10.05,
-//     replyMessage:
-//       "Fourxbt is an advanced, fully autonomous AI-driven blockchain analytics tool tailored for the Web3 ecosystem. It combines cutting-edge AI technology with a user-friendly interface to deliver real-time market insights, analytics, and educational content. Operating seamlessly on Twitter (X) and other platforms, the AI Agent ensures users are informed and equipped to navigate the dynamic world of blockchain and crypto.\r\n\r\nWith 24/7 availability and a direct connection to blockchain networks and news sources, the AI Agent provides an unrivaled blend of precision, efficiency, and privacy. It is designed not just as a passive tool but as an interactive digital assistant that enhances user engagement, from monitoring market trends to answering queries about DeFi and NFTs.",
-//     messageUrl:
-//       "https://warpcast.com/cryptopioneerxyz/0x70e4978406bf51361ecc04eb26f233c6fce2c5e1",
-//     teleOriginThreadId: 0,
-//   },
-// ];
+
 export default function Dashboard() {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -364,7 +129,7 @@ export default function Dashboard() {
     });
     console.log(response.data);
 
-    setTokens(response.data);
+    setTokens(response.data.length ? response.data : defaultData);
   };
 
   useEffect(() => {
@@ -380,7 +145,7 @@ export default function Dashboard() {
     fetchTokens();
     const fetchTop = async () => {
       const response = await axios.get(`${API_ENDPOINT}/czagents/gettop`);
-      setTop(response.data);
+      setTop(response.data.length ? response.data : defaultData);
     };
 
     fetchTop();
@@ -399,7 +164,7 @@ export default function Dashboard() {
         <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
       ) : (
         <div className="min-h-screen bg-[#1a1a1a]">
-          <div className="sticky top-0 z-100 items-center flex justify-center bg-[#1a1a1a] py-2">
+          <div className="sticky top-0 z-40 items-center flex justify-center bg-[#1a1a1a] py-2">
             <div className="md:w-4/5 w-full p-2">
               <Row>
                 <Col
@@ -462,12 +227,12 @@ export default function Dashboard() {
               </Row>
             </div>
           </div>
-          <div className="mt-2 w-full flex justify-center">
+          <div className="mt-2 z-10 w-full flex justify-center">
             <div className="md:w-4/5 w-full px-2">
               <div className="px-4 py-1 rounded-md border-2 border-[#868686] mb-2">
                 <Marquee>
                   {" "}
-                  {tokens.map((token: TokenData, index: any) => (
+                  {tokens.map((token: TokenData, index: number) => (
                     <div key={index} className="mr-4 text-white">
                       <Link href={`/agent/${token.tokenId}`}>
                         <span
@@ -495,14 +260,14 @@ export default function Dashboard() {
                 </Marquee>
               </div>
               <div className="flex justify-between w-full">
-                <div className="w-1/2 flex justify-between">
+                <Col  span={24} md={14} className="w-full flex justify-between pr-5">
                   <div>
                     <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate text-black">
                       {tokens.length} agents deployed
                     </TotalToken>
                   </div>
 
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-2 items-center justify-end ">
                     <SortTag
                       isActive={sort == "desc"}
                       className="cursor-pointer text-base font-semibold truncate"
@@ -520,9 +285,9 @@ export default function Dashboard() {
                       Oldest First
                     </SortTag>
                   </div>
-                </div>
+                </Col>
                 {!isMobile && (
-                  <div className="w-1/2 flex justify-end">
+                  <Col span={24} md={10} className=" flex justify-end pr-5">
                     <div className="flex items-center gap-2">
                       <SortTag
                         isActive={sort == "desc"}
@@ -541,13 +306,13 @@ export default function Dashboard() {
                         Top Gainer
                       </SortTag>
                     </div>
-                  </div>
+                  </Col>
                 )}
               </div>
               <Row justify="space-between" className="md:mt-5 mt-2">
                 <Col span={24} md={14}>
                   <ListItem>
-                    {tokens.map((token: TokenData, index: any) => (
+                    {tokens.map((token: TokenData, index: number) => (
                       <>
                         <Row
                           key={index}
@@ -718,7 +483,7 @@ export default function Dashboard() {
                   <Col span={24} md={10}>
                     <WrapperRight>
                       <RightContent>
-                        {tokens.map((token: TokenData, index: any) => (
+                        {tokens.map((token: TokenData, index: number) => (
                           <BoxContent isFirst={index == 0} key={index}>
                             <Link href={`/agent/${token.tokenId}`}>
                               <BoxPrice isFirst={index == 0}>

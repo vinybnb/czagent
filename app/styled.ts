@@ -117,32 +117,32 @@ export const ButtonGuide = styled.button`
 
 export const WrapperRight = styled.div`
   margin-left: 20px;
-  overflow-y: scroll;
-  max-height: calc(100vh - 280px);
+  // overflow-y: scroll;
+  // max-height: calc(100vh - 280px);
 
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
+  // &::-webkit-scrollbar {
+  //   width: 8px;
+  //   height: 8px;
+  // }
 
-  &::-webkit-scrollbar-track {
-    background-color: #1f1f1f;
-    border-radius: 10px;
-  }
+  // &::-webkit-scrollbar-track {
+  //   background-color: #1f1f1f;
+  //   border-radius: 10px;
+  // }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #343434;
-    border-radius: 10px;
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #343434;
+  //   border-radius: 10px;
 
-    &:hover {
-      background-color: #555;
-    }
-  }
+  //   &:hover {
+  //     background-color: #555;
+  //   }
+  // }
 `;
 
 export const RightContent = styled.div`
-  margin-right: 20px;
-  padding: 10px 35px;
+  // margin-right: 20px;
+  // padding: 10px 35px;
 `;
 
 export const TopLabel = styled.div`
@@ -195,33 +195,33 @@ export const CardInfo = styled.div`
   }
 `;
 export const ListItem = styled.div`
-  max-height: calc(100vh - 280px);
-  overflow-y: auto;
+  // max-height: calc(100vh - 280px);
+  // overflow-y: auto;
   padding-right: 20px;
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
+  // &::-webkit-scrollbar {
+  //   width: 8px;
+  //   height: 8px;
+  // }
 
-  &::-webkit-scrollbar-track {
-    background-color: #1f1f1f;
-    border-radius: 10px;
-  }
+  // &::-webkit-scrollbar-track {
+  //   background-color: #1f1f1f;
+  //   border-radius: 10px;
+  // }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #343434;
-    border-radius: 10px;
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #343434;
+  //   border-radius: 10px;
 
-    &:hover {
-      background-color: #555;
-    }
-  }
+  //   &:hover {
+  //     background-color: #555;
+  //   }
+  // }
 
-  @media (max-width: 768px) {
-    padding-right: 10px;
-    width: 100%;
-    max-height: calc(100vh - 345px);
-  }
+  // @media (max-width: 768px) {
+  //   padding-right: 10px;
+  //   width: 100%;
+  //   max-height: calc(100vh - 345px);
+  // }
 `;
 
 export const CustomAvatar = styled(Avatar)`
