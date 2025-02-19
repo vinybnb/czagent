@@ -54,7 +54,7 @@ const CreateTokenComponent = () => {
 
               {isMobile && (
                 <Col span={12} md={4} className="flex justify-end items-center">
-                  <ButtonGuide onClick={() => {}}>CREATE TOKEN</ButtonGuide>
+                  <ButtonGuide onClick={() => {}}>Create Agent</ButtonGuide>
                 </Col>
               )}
               <Col span={24} md={16}>
@@ -65,7 +65,7 @@ const CreateTokenComponent = () => {
                     width="100%"
                     value={""}
                     onChange={() => {}}
-                    placeholder="Search by token name, symbol or requestor ...."
+                    placeholder="Search by agent name, symbol or requestor ...."
                   />
                 </SearchBox>
               </Col>
@@ -86,7 +86,7 @@ const CreateTokenComponent = () => {
               {" "}
               {top?.top.map((token: any, index: any) => (
                 <div key={index} className="mr-4 text-white">
-                  <Link href={`/token/${token.contractAddress}`}>
+                  <Link href={`/agent/${token.tokenid}`}>
                     <span
                       className={`${
                         index === 0 && "text-yellow-500"
@@ -112,7 +112,7 @@ const CreateTokenComponent = () => {
           <div className="md:w-4/5 w-full flex justify-between">
             <div>
               <TotalToken className="w-fit px-4 text-black py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate">
-                {top && top?.totalToken} tokens deployed
+                {top && top?.totalToken} agents deployed
               </TotalToken>
             </div>
 

@@ -413,7 +413,7 @@ export default function Dashboard() {
                 <ButtonGuide
                   onClick={() => router.push("https://x.com/czagents")}
                 >
-                  CREATE TOKEN
+                  Create Agent
                 </ButtonGuide>
               </Col>
             )}
@@ -425,7 +425,7 @@ export default function Dashboard() {
                   width="100%"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search by token name, symbol or requestor ...."
+                  placeholder="Search by agent name, symbol or requestor ...."
                 />
               </SearchBox>
             </Col>
@@ -435,7 +435,7 @@ export default function Dashboard() {
                 <ButtonGuide
                   onClick={() => router.push("https://x.com/czagents")}
                 >
-                  <span className="font-bold">CREATE TOKEN</span>
+                  <span className="font-bold">Create Agent</span>
                 </ButtonGuide>
               </Col>
             )}
@@ -449,7 +449,7 @@ export default function Dashboard() {
               {" "}
               {tokens.map((token: TokenData, index: any) => (
                 <div key={index} className="mr-4 text-white">
-                  <Link href={`/token/${token.contractAddress}`}>
+                  <Link href={`/agent/${token.tokenId}`}>
                     <span
                       className={`${
                         index === 0 && "text-yellow-500"
@@ -476,7 +476,7 @@ export default function Dashboard() {
             <div className="w-1/2 flex justify-between">
               <div>
                 <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate">
-                  {tokens.length} tokens deployed
+                  {tokens.length} agents deployed
                 </TotalToken>
               </div>
 
@@ -596,7 +596,7 @@ export default function Dashboard() {
                             </Col>}
                             <Col span={12}>
                               <CustomButton className="py-2 px-3 bg-[#FFCC00] rounded-[20px] text-black">
-                                <Link href={`/token/${token.tokenId}`}>
+                                <Link href={`/agent/${token.tokenId}`}>
                                   View Detail
                                 </Link>
                               </CustomButton>
@@ -627,7 +627,7 @@ export default function Dashboard() {
                         >
                           <Col span={6} className="mr-3">
                             <CustomButton className="rounded-2xl px-2 py-1 ">
-                              <Link href={`/`} target="_blank">
+                              <Link href={`${token.messageUrl}`} target="_blank">
                                 <div className="flex items-center ">
                                   <World />
                                   <span className="ml-2">Website</span>
@@ -635,7 +635,7 @@ export default function Dashboard() {
                               </Link>
                             </CustomButton>
                           </Col>
-                          <Col span={6} className="flex justify-end">
+                          {token.contractAddress && <Col span={6} className="flex justify-end">
                             <CustomButton
                               className="rounded-2xl px-2 py-1"
                               onClick={() =>
@@ -650,11 +650,11 @@ export default function Dashboard() {
                                 <span className="ml-2">Chart</span>
                               </div>
                             </CustomButton>
-                          </Col>
+                          </Col>}
                           <Col span={9} className="flex justify-end">
                             <ButtonDetail className="py-2 px-3 bg-[#FFCC00] rounded-[20px] text-black">
                               {" "}
-                              <Link href={`/token/${token.contractAddress}`}>
+                              <Link href={`/agent/${token.tokenId}`}>
                                 View Detail
                               </Link>
                             </ButtonDetail>
@@ -687,7 +687,7 @@ export default function Dashboard() {
                   <RightContent>
                     {tokens.map((token: TokenData, index: any) => (
                       <BoxContent isFirst={index == 0} key={index}>
-                        <Link href={`/token/${token.contractAddress}`}>
+                        <Link href={`/agent/${token.tokenId}`}>
                           <BoxPrice isFirst={index == 0}>
                             <Row className="justify-between px-5 pt-3">
                               <div className="font-bold text-xl">

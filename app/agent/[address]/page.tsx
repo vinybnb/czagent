@@ -97,7 +97,7 @@ export default function TokenPage() {
                   width="100%"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search by token name, symbol or requestor ...."
+                  placeholder="Search by agent name, symbol or requestor ...."
                 />
               </SearchBox>
             </Col>}
@@ -105,7 +105,7 @@ export default function TokenPage() {
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
                 <ButtonGuide onClick={() => setShowModal(true)} >
-                  <span className="font-bold">CREATE TOKEN</span>
+                  <span className="font-bold">Create Agent</span>
                 </ButtonGuide>
               </Col>
             )}
