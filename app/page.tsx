@@ -3,7 +3,7 @@
 
 "use client";
 
-import { Avatar, Col, PaginationProps, Row, Tag } from "antd";
+import { Avatar, Col, Row, Tag } from "antd";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -76,11 +76,11 @@ export type TokenData = {
   priceChange: number;
 };
 
-type TopInfoCache = {
-  time: number;
-  totalToken: number;
-  top: TokenData[];
-};
+// type TopInfoCache = {
+//   time: number;
+//   totalToken: number;
+//   top: TokenData[];
+// };
 // const defaultData: any = [
 //   {
 //     tokenId: "0820-31b8-3fd2-c56a",
@@ -325,9 +325,9 @@ type TopInfoCache = {
 // ];
 export default function Dashboard() {
   const router = useRouter();
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [tokens, setTokens] = useState([]);
-  const [top, setTop] = useState<TopInfoCache | undefined>(undefined);
+  // const [top, setTop] = useState<TopInfoCache | undefined>(undefined);
   const [sort, setSort] = useState("desc");
   const [search, setSearch] = useState("");
   const debouncedValue = useDebounce(search, 500);
@@ -356,7 +356,8 @@ export default function Dashboard() {
   const fetchTokens = async () => {
     const response = await axios.post(`${API_ENDPOINT}/czagents`, {
       query: search,
-      page: currentPage,
+      // page: currentPage,
+      page: 1,
       chain: 8453,
       sort,
     });
@@ -372,25 +373,25 @@ export default function Dashboard() {
 
       fetchTokens();
     }
-  }, [currentPage, sort, search, debouncedValue]);
+  }, [sort, search, debouncedValue]);
 
-  useEffect(() => {
-    fetchTokens();
-    const fetchTop = async () => {
-      const response = await axios.get(`${API_ENDPOINT}/czagents/gettop`);
-      setTop(response.data);
-    };
+  // useEffect(() => {
+  //   fetchTokens();
+  //   const fetchTop = async () => {
+  //     const response = await axios.get(`${API_ENDPOINT}/czagents/gettop`);
+  //     // setTop(response.data);
+  //   };
 
-    fetchTop();
-  }, [sort, currentPage]);
+  //   fetchTop();
+  // }, [sort, currentPage]);
 
-  const onChangePage: PaginationProps["onShowSizeChange"] = (
-    current,
-    pageSize
-  ) => {
-    setCurrentPage(current);
-    console.log(pageSize, current);
-  };
+  // const onChangePage: PaginationProps["onShowSizeChange"] = (
+  //   current,
+  //   pageSize
+  // ) => {
+  //   setCurrentPage(current);
+  //   console.log(pageSize, current);
+  // };
   return (
     <div>
       {loading ? (
