@@ -9,7 +9,14 @@ import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
 // import { getFirstAndLastString } from '@/app/utils/helper';
-import { Address, BoxInfo, ButtonGuide, CustomButton, InputSearch, SearchBox } from "@/app/styled";
+import {
+  Address,
+  BoxInfo,
+  ButtonGuide,
+  CustomButton,
+  InputSearch,
+  SearchBox,
+} from "@/app/styled";
 import useIsMobile from "@/app/hooks/useIsMobile";
 import { TokenData } from "@/app/page";
 import {
@@ -42,14 +49,11 @@ export default function TokenPage() {
   useEffect(() => {
     (async () => {
       const { address } = params;
-      const tokenRes = await axios.post(
-        `${API_ENDPOINT}/czagents/gettoken`,
-        {
-          address: address,
-          tokenid: address,
-          chain: 8453,
-        }
-      );
+      const tokenRes = await axios.post(`${API_ENDPOINT}/czagents/gettoken`, {
+        address: address,
+        tokenid: address,
+        chain: 8453,
+      });
       // const dexScreenerRes = await axios.get(
       //   `https://api.dexscreener.com/latest/dex/tokens/${address}`
       // );
@@ -68,7 +72,7 @@ export default function TokenPage() {
 
   return (
     <Layout>
-      <div className="sticky top-0 z-100 items-center flex justify-center bg-[#222222] py-2">
+      <div className="sticky top-0 z-100 items-center flex justify-center bg-[#1a1a1a] py-2">
         <div className="md:w-4/5 w-full p-2">
           <Row>
             <Col span={12} md={4} className="flex justify-start items-center">
@@ -89,22 +93,24 @@ export default function TokenPage() {
                 </ButtonGuide>
               </Col>
             )}
-            {!isMobile && <Col span={24} md={16}>
-              <SearchBox>
-                <IconSearch />
-                <InputSearch
-                  type="text"
-                  width="100%"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search by agent name, symbol or requestor ...."
-                />
-              </SearchBox>
-            </Col>}
+            {!isMobile && (
+              <Col span={24} md={16}>
+                <SearchBox>
+                  <IconSearch />
+                  <InputSearch
+                    type="text"
+                    width="100%"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search by agent name, symbol or requestor ...."
+                  />
+                </SearchBox>
+              </Col>
+            )}
 
             {!isMobile && (
               <Col span={24} md={4} className="flex justify-end items-center">
-                <ButtonGuide onClick={() => setShowModal(true)} >
+                <ButtonGuide onClick={() => setShowModal(true)}>
                   <span className="font-bold">Create Agent</span>
                 </ButtonGuide>
               </Col>
@@ -123,37 +129,45 @@ export default function TokenPage() {
           <Row gutter={8} className="md:flex hidden text-white">
             <Col span={16}>
               <div>
-                {token.contractAddress ? <iframe
-                  style={{
-                    width: "100%",
-                    border: "none",
-                    height: "calc(100vh - 280px)",
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                  }}
-                  src={`https://dexscreener.com/bsc/${token?.poolAddress}?embed=1&loadChartSettings=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`}
-                />: <div style={{
-                    width: "100%",
-                    border: "none",
-                    height: "calc(100vh - 280px)",
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                    position: 'relative',
-                    paddingTop: '20%',
-                    left: "40%"
-                    // textAlign: 'center'
-                  }}>
-                    <Button style={{
-                      position: 'absolute',
-                      backgroundColor: '#FFCC00',
-                      fontWeight: 'bold',
-                      fontSize: '1.5rem',
-                      padding: '30px 20px',
-                    }}>
+                {token.contractAddress ? (
+                  <iframe
+                    style={{
+                      width: "100%",
+                      border: "none",
+                      height: "calc(100vh - 280px)",
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                    }}
+                    src={`https://dexscreener.com/bsc/${token?.poolAddress}?embed=1&loadChartSettings=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      border: "none",
+                      height: "calc(100vh - 280px)",
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                      position: "relative",
+                      paddingTop: "20%",
+                      left: "40%",
+                      // textAlign: 'center'
+                    }}
+                  >
+                    <Button
+                      style={{
+                        position: "absolute",
+                        backgroundColor: "#FFCC00",
+                        fontWeight: "bold",
+                        fontSize: "1.5rem",
+                        padding: "30px 20px",
+                      }}
+                    >
                       <RocketOutlined></RocketOutlined>
                       Launch {token.symbol}
-                      </Button>
-                  </div>}
+                    </Button>
+                  </div>
+                )}
               </div>
               <BoxInfo className="truncate">
                 <div className="flex">
@@ -185,20 +199,22 @@ export default function TokenPage() {
                       </div>
                     </Link>
                   </CustomButton>
-                  {token.contractAddress && <CustomButton
-                    className="ml-4 px-4 py-2 rounded-2xl"
-                    onClick={() =>
-                      window.open(
-                        `https://dexscreener.com/bsc/${token.poolAddress}`,
-                        "_blank"
-                      )
-                    }
-                  >
-                    <div className="flex items-center">
-                      <Chart />
-                      <span className="ml-2">Chart</span>
-                    </div>
-                  </CustomButton>}
+                  {token.contractAddress && (
+                    <CustomButton
+                      className="ml-4 px-4 py-2 rounded-2xl"
+                      onClick={() =>
+                        window.open(
+                          `https://dexscreener.com/bsc/${token.poolAddress}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <div className="flex items-center">
+                        <Chart />
+                        <span className="ml-2">Chart</span>
+                      </div>
+                    </CustomButton>
+                  )}
                 </div>
               </BoxInfo>
             </Col>
@@ -215,25 +231,31 @@ export default function TokenPage() {
                       {token.name} ({token.symbol})
                     </div>
                     <div>
-                      {token.contractAddress && <Address className="text-[#656565]">
-                        Address:{" "}
-                        <a
-                          target="_blank"
-                          href={`https://bscscan.com/address/${token.contractAddress}`}
-                        >
-                          {getFirstAndLastString(token.contractAddress)}
-                        </a>
-                      </Address>}
+                      {token.contractAddress && (
+                        <Address className="text-[#656565]">
+                          Address:{" "}
+                          <a
+                            target="_blank"
+                            href={`https://bscscan.com/address/${token.contractAddress}`}
+                          >
+                            {getFirstAndLastString(token.contractAddress)}
+                          </a>
+                        </Address>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-between mt-2">
                   <span className=" text-base">24h Volume:</span>
-                  <span className=" text-base">${Number(token.volume24h).toLocaleString()}</span>
+                  <span className=" text-base">
+                    ${Number(token.volume24h).toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className=" text-base">Marketcap:</span>
-                  <span className=" text-base">${Number(token.marketCap).toLocaleString()}</span>
+                  <span className=" text-base">
+                    ${Number(token.marketCap).toLocaleString()}
+                  </span>
                 </div>
               </BoxInfo>
               <div className="mt-2">
@@ -245,7 +267,7 @@ export default function TokenPage() {
                     height: "calc(100vh - 300px)",
                     borderRadius: "20px",
                   }}
-                   src={`https://pancakeswap.finance/?outputCurrency=${token?.contractAddress}`}
+                  src={`https://pancakeswap.finance/?outputCurrency=${token?.contractAddress}`}
                 />
               </div>
             </Col>
@@ -357,20 +379,22 @@ export default function TokenPage() {
                         </div>
                       </Link>
                     </CustomButton>
-                    {token.contractAddress && <CustomButton
-                      className="ml-4 px-4 py-2 rounded-2xl"
-                      onClick={() =>
-                        window.open(
-                          `https://dexscreener.com/bsc/${token.poolAddress}`,
-                          "_blank"
-                        )
-                      }
-                    >
-                      <div className="flex items-center">
-                        <Chart />
-                        <span className="ml-2">Chart</span>
-                      </div>
-                    </CustomButton>}
+                    {token.contractAddress && (
+                      <CustomButton
+                        className="ml-4 px-4 py-2 rounded-2xl"
+                        onClick={() =>
+                          window.open(
+                            `https://dexscreener.com/bsc/${token.poolAddress}`,
+                            "_blank"
+                          )
+                        }
+                      >
+                        <div className="flex items-center">
+                          <Chart />
+                          <span className="ml-2">Chart</span>
+                        </div>
+                      </CustomButton>
+                    )}
                   </div>
                 </BoxInfo>
               )}
@@ -379,8 +403,9 @@ export default function TokenPage() {
 
           <Row className="w-full justify-between bg-[#FFCC00] border-2 border-black rounded-xl px-4 py-2 mt-2">
             <button
-              className={`text-base font-semibold px-2 py-1 ${item === "buy/sell" && "shadow-[2.64px_2.64px_0px_#000000]"
-                } border-black rounded-xl border-2`}
+              className={`text-base font-semibold px-2 py-1 ${
+                item === "buy/sell" && "shadow-[2.64px_2.64px_0px_#000000]"
+              } border-black rounded-xl border-2`}
               onClick={() => onChange("buy/sell")}
             >
               <div className="flex items-center">
@@ -391,8 +416,9 @@ export default function TokenPage() {
               </div>
             </button>
             <button
-              className={`text-base font-semibold px-2 py-1 ${item === "chart" && "shadow-[2.64px_2.64px_0px_#000000]"
-                } border-black rounded-xl border-2`}
+              className={`text-base font-semibold px-2 py-1 ${
+                item === "chart" && "shadow-[2.64px_2.64px_0px_#000000]"
+              } border-black rounded-xl border-2`}
               onClick={() => onChange("chart")}
             >
               <div className="flex items-center">
@@ -403,8 +429,9 @@ export default function TokenPage() {
               </div>
             </button>
             <button
-              className={`text-base font-semibold px-2 py-1 ${item === "info" && "shadow-[2.64px_2.64px_0px_#000000]"
-                } border-black rounded-xl border-2`}
+              className={`text-base font-semibold px-2 py-1 ${
+                item === "info" && "shadow-[2.64px_2.64px_0px_#000000]"
+              } border-black rounded-xl border-2`}
               onClick={() => onChange("info")}
             >
               <div className="flex items-center">

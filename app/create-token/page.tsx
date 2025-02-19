@@ -15,12 +15,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import useIsMobile from "../hooks/useIsMobile";
-import {
-  ButtonGuide,
-  InputSearch,
-  SearchBox,
-  TotalToken
-} from "../styled";
+import { ButtonGuide, InputSearch, SearchBox, TotalToken } from "../styled";
 const CreateTokenComponent = () => {
   const [top, setTop] = useState<any | undefined>(undefined);
   const isMobile = useIsMobile();
@@ -37,8 +32,8 @@ const CreateTokenComponent = () => {
   }, []);
   return (
     <>
-      <div className="min-h-screen bg-[#222222]">
-        <div className="sticky top-0 z-100 items-center flex justify-center bg-[#222222] py-2">
+      <div className="min-h-screen bg-[#1a1a1a]">
+        <div className="sticky top-0 z-100 items-center flex justify-center bg-[#1a1a1a] py-2">
           <div className="md:w-4/5 w-full p-2">
             <Row>
               <Col span={12} md={4} className="flex justify-start items-center">
@@ -128,7 +123,6 @@ const CreateTokenComponent = () => {
           <div className="md:w-4/5 w-full bg-[#5E5E5E] rounded-lg">
             <div className="bg-[#FFCC00] flex items-center justify-between w-full rounded-lg py-14 px-10">
               <div className="flex  relative items-center">
-             
                 <div className="flex-1 ">
                   <h3 className="font-semibold text-3xl text-black mb-1">
                     Token logo

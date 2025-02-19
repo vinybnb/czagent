@@ -7,7 +7,7 @@ export const StyledCard = styled.div<{ isFirst: boolean }>`
   padding: 24px 24px;
   border: solid 2px #000;
   border-radius: 15px;
-  background-color: #222222;
+  background-color: #1a1a1a;
   width: 100%;
   box-shadow: ${(props) =>
     props.isFirst ? "6.64px 6.64px 0px #000000" : "none"};
@@ -53,7 +53,6 @@ export const TotalToken = styled.div`
   border-color: #00000;
   border-radius: 16px;
   border: 0.81px solid;
-  box-shadow: 3.64px 3.64px 0px #000000;
 `;
 
 export const SortTag = styled(Col)<{ isActive: boolean }>`
@@ -61,11 +60,10 @@ export const SortTag = styled(Col)<{ isActive: boolean }>`
   background-color: ${(props) => (props.isActive ? "#222222" : "#454545")};
   border-radius: 16px;
   border: 0.81px solid #5f5f5f;
-  box-shadow: ${(props) =>
-    props.isActive ? "3.64px 3.64px 0px #5f5f5f" : "none"};
   justify-content: center;
   align-items: center;
   display: flex;
+  color: ${(props) => (props.isActive ? "#ffffff" : "#969696")};
 
   @media (max-width: 768px) {
     font-size: 10px;
@@ -129,17 +127,17 @@ export const WrapperRight = styled.div`
   max-height: calc(100vh - 280px);
 
   &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    background-color: #1f1f1f;
     border-radius: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #343434;
     border-radius: 10px;
 
     &:hover {
@@ -150,11 +148,6 @@ export const WrapperRight = styled.div`
 
 export const RightContent = styled.div`
   margin-right: 20px;
-  background-color: #333;
-  border: 2.86px solid;
-  border-color: #0e0e0e;
-  border-radius: 14.32px;
-  box-shadow: 7.64px 7.64px 0px #000000;
   padding: 10px 35px;
 `;
 
@@ -176,33 +169,27 @@ export const TimeLabel = styled.div`
 `;
 
 export const BoxContent = styled.div<{ isFirst: boolean }>`
-  background-color: #333;
-  border: 2px solid #d4ba51;
+  background-color: #1f1f1f;
   border-radius: 18px;
-  min-height: 166px;
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  color: #7a7a7a;
+  margin-top: ${(props) => (props.isFirst ? "0px" : "10px")};
+  color: #fff;
+  padding: 20px 10px;
 
   transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 
   &:hover {
-    border-color: #ffcc00;
+    border: 2px solid #ffcc00;
     transform: scaleX(0.95);
     cursor: pointer;
   }
 `;
 
 export const BoxPrice = styled.div<{ isFirst: boolean }>`
- background-color: ${(props) => (props.isFirst ? "#FFCC00" : "#000")};
   width: 100%
   height: 69px;
-  border: 2.86px solid;
-  border-color: #0e0e0e;
   border-radius: 10.32px;
-  box-shadow: 4.64px 4.64px 0px #000000;
-  color: ${(props) => (props.isFirst ? "#000" : "#fff")}
+  color: #fff
 `;
 
 export const CardInfo = styled.div`
@@ -220,17 +207,17 @@ export const ListItem = styled.div`
   overflow-y: auto;
   padding-right: 20px;
   &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    background-color: #1f1f1f;
     border-radius: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #343434;
     border-radius: 10px;
 
     &:hover {
@@ -288,7 +275,7 @@ export const CustomButton = styled.button`
 
 export const ButtonDetail = styled.button`
   padding: 8px 20px;
-  background-color:#FFCC00;
+  background-color: #ffcc00;
   color: #000 !important;
   border: 2px solid;
   border-color: #000000;
