@@ -3,7 +3,7 @@
 
 "use client";
 
-import { Avatar, Col, Layout, Row } from "antd";
+import { Avatar, Col, Row } from "antd";
 import moment from "moment";
 import Link from "next/link";
 import { useState } from "react";
@@ -31,7 +31,6 @@ import {
 } from "./styled";
 import { getFirstAndLastString } from "./utils/helper";
 
-const { Content } = Layout;
 
 export type TokenData = {
   userId: string;
@@ -157,8 +156,8 @@ const defaultData: any = [
     image:
       "https://dd.dexscreener.com/ds-data/tokens/bsc/0x6adac9a1fa8c994abb375d2d30f93880c8004f7b.png",
     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-    username: "cryptopioneerxyz",
-    usernameDisplay: "CryptoPioneerXyz",
+    username: "DegenPioneer",
+    usernameDisplay: "DegenPioneer",
     userPicture:
       "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/2026d0ba-46e6-4785-0dd7-ec6b1693bf00/rectcrop3",
     messageType: 1,
@@ -204,8 +203,8 @@ const defaultData: any = [
     image:
       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xce30b968d5e76a67f3946e0598f95d551ce03ac3.png",
     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-    username: "cryptopioneerxyz",
-    usernameDisplay: "CryptoPioneerXyz",
+    username: "Web3Visionary",
+    usernameDisplay: "Web3Visionary",
     userPicture:
       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xce30b968d5e76a67f3946e0598f95d551ce03ac3/header.png",
     messageType: 1,
@@ -251,8 +250,8 @@ const defaultData: any = [
     symbol: "CaptainBNB",
     image: "https://s2.coinmarketcap.com/static/img/coins/64x64/35734.png",
     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-    username: "cryptopioneerxyz",
-    usernameDisplay: "CryptoPioneerXyz",
+    username: "MetaFiGuru",
+    usernameDisplay: "MetaFiGuru",
     userPicture:
       "https://dd.dexscreener.com/ds-data/tokens/bsc/0x47a1eb0b825b73e6a14807beaecafef199d5477c/header.png",
     messageType: 1,
@@ -300,8 +299,8 @@ const defaultData: any = [
     image:
       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xcab6311f95faf6b5db4fd306092b6bcd9807e8f0.png",
     lockerAddress: "0xdAE92f2f086EF66FD71C82527C11147965117f2F",
-    username: "cryptopioneerxyz",
-    usernameDisplay: "CryptoPioneerXyz",
+    username: "BlockchainPioneer",
+    usernameDisplay: "BlockchainPioneer",
     userPicture:
       "https://dd.dexscreener.com/ds-data/tokens/bsc/0xcab6311f95faf6b5db4fd306092b6bcd9807e8f0/header.png",
     messageType: 1,
@@ -439,7 +438,7 @@ export default function Dashboard() {
           </Row>
         </div>
       </div>
-      <Content className="mt-2 w-full flex justify-center">
+      <div className="mt-2 w-full flex justify-center">
         <div className="md:w-4/5 w-full px-2">
           <div className="px-4 py-1 rounded-md border-2 border-[#868686] mb-2">
             <Marquee>
@@ -736,7 +735,7 @@ export default function Dashboard() {
             )}
           </Row>
         </div>
-      </Content>
+      </div>
 
       <HowItWorks showModal={showModal} setShowModal={setShowModal} />
     </div>
