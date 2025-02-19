@@ -361,7 +361,7 @@ export default function Dashboard() {
                               <Row justify="space-between" className="mt-4">
                                 <Col span={6}>
                                   <CustomButton className="px-2 py-1 rounded-2xl">
-                                    <Link href={`/`} target="_blank">
+                                    <Link href={`${token.messageUrl}`} target="_blank">
                                       <div className="flex items-center">
                                         <World />
                                         <span className="ml-2">Website</span>
