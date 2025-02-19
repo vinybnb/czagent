@@ -219,7 +219,7 @@ export default function TokenPage() {
                         Address:{" "}
                         <a
                           target="_blank"
-                          href={`https://bscscan.org/address/${token.contractAddress}`}
+                          href={`https://bscscan.com/address/${token.contractAddress}`}
                         >
                           {getFirstAndLastString(token.contractAddress)}
                         </a>
@@ -229,11 +229,11 @@ export default function TokenPage() {
                 </div>
                 <div className="flex justify-between mt-2">
                   <span className=" text-base">24h Volume:</span>
-                  <span className=" text-base">${token.volume24h}</span>
+                  <span className=" text-base">${Number(token.volume24h).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className=" text-base">Marketcap:</span>
-                  <span className=" text-base">${token.marketCap}</span>
+                  <span className=" text-base">${Number(token.marketCap).toLocaleString()}</span>
                 </div>
               </BoxInfo>
               <div className="mt-2">
@@ -245,7 +245,7 @@ export default function TokenPage() {
                     height: "calc(100vh - 300px)",
                     borderRadius: "20px",
                   }}
-                  src={`https://pancakeswap.finance/#/swap?exactField=input&outputCurrency=${token?.contractAddress}&chain=base`}
+                   src={`https://pancakeswap.finance/?outputCurrency=${token?.contractAddress}`}
                 />
               </div>
             </Col>
@@ -269,7 +269,7 @@ export default function TokenPage() {
                   height: "calc(100vh - 200px)",
                   borderRadius: "20px",
                 }}
-                src={`https://pancakeswap.finance/#/swap?exactField=input&outputCurrency=${token?.contractAddress}&chain=base`}
+                src={`https://pancakeswap.finance/?outputCurrency=${token?.contractAddress}`}
               />
             </div>
           )}
