@@ -1,1 +1,1 @@
-export const API_ENDPOINT="https://apidev.tokenfather.io";
+export const API_ENDPOINT="https://api.czagents.fun";
