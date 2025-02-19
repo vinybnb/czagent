@@ -634,7 +634,7 @@ export default function Dashboard() {
                               className="rounded-2xl px-2 py-1"
                               onClick={() =>
                                 window.open(
-                                  `https://dexscreener.com/base/${token.poolAddress}`,
+                                  `https://dexscreener.com/bsc/${token.poolAddress}`,
                                   "_blank"
                                 )
                               }
