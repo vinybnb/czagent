@@ -3,7 +3,7 @@
 
 "use client";
 
-import { Avatar, Col, PaginationProps, Row, Tag } from "antd";
+import { Avatar, Col, Row, Tag } from "antd";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -335,6 +335,8 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log(top);
+    setCurrentPage(1);
     setTimeout(() => setLoading(false), 1000); // Simulating loading
   }, []);
 
@@ -384,13 +386,13 @@ export default function Dashboard() {
     fetchTop();
   }, [sort, currentPage]);
 
-  const onChangePage: PaginationProps["onShowSizeChange"] = (
-    current,
-    pageSize
-  ) => {
-    setCurrentPage(current);
-    console.log(pageSize, current);
-  };
+  // const onChangePage: PaginationProps["onShowSizeChange"] = (
+  //   current,
+  //   pageSize
+  // ) => {
+  //   setCurrentPage(current);
+  //   console.log(pageSize, current);
+  // };
   return (
     <div>
       {loading ? (
