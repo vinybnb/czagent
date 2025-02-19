@@ -552,7 +552,7 @@ export default function Dashboard() {
                                 Address:{" "}
                                 <a
                                   target="_blank"
-                                  href={`https://basescan.org/address/${token.contractAddress}`}
+                                  href={`https://bscscan.com/address/${token.contractAddress}`}
                                 >
                                   {getFirstAndLastString(token.contractAddress)}
                                 </a>
