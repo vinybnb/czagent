@@ -1,9 +1,9 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { Row, Col, Avatar, Layout } from "antd";
+import { Row, Col, Avatar, Layout, Button } from "antd";
 const { Content } = Layout;
-import { UserOutlined } from "@ant-design/icons";
+import { RocketOutlined, UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
@@ -22,6 +22,7 @@ import {
 } from "@/public/elements/icon";
 import { getFirstAndLastString } from "@/app/utils/helper";
 import HowItWorks from "@/app/components/HowItWorks";
+import { API_ENDPOINT } from "@/app/utils/constants";
 
 type Item = "buy/sell" | "chart" | "info";
 
@@ -42,9 +43,10 @@ export default function TokenPage() {
     (async () => {
       const { address } = params;
       const tokenRes = await axios.post(
-        `https://api.tokenfather.io/tokenfather/gettoken`,
+        `${API_ENDPOINT}/czagents/gettoken`,
         {
           address: address,
+          tokenid: address,
           chain: 8453,
         }
       );
@@ -121,7 +123,7 @@ export default function TokenPage() {
           <Row gutter={8} className="md:flex hidden text-white">
             <Col span={16}>
               <div>
-                <iframe
+                {token.contractAddress ? <iframe
                   style={{
                     width: "100%",
                     border: "none",
@@ -129,8 +131,29 @@ export default function TokenPage() {
                     borderRadius: "20px",
                     overflow: "hidden",
                   }}
-                  src={`https://dexscreener.com/base/${token?.poolAddress}?embed=1&loadChartSettings=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`}
-                />
+                  src={`https://dexscreener.com/bsc/${token?.poolAddress}?embed=1&loadChartSettings=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`}
+                />: <div style={{
+                    width: "100%",
+                    border: "none",
+                    height: "calc(100vh - 280px)",
+                    borderRadius: "20px",
+                    overflow: "hidden",
+                    position: 'relative',
+                    paddingTop: '20%',
+                    left: "40%"
+                    // textAlign: 'center'
+                  }}>
+                    <Button style={{
+                      position: 'absolute',
+                      backgroundColor: '#FFCC00',
+                      fontWeight: 'bold',
+                      fontSize: '1.5rem',
+                      padding: '30px 20px',
+                    }}>
+                      <RocketOutlined></RocketOutlined>
+                      Launch {token.symbol}
+                      </Button>
+                  </div>}
               </div>
               <BoxInfo className="truncate">
                 <div className="flex">
@@ -162,11 +185,11 @@ export default function TokenPage() {
                       </div>
                     </Link>
                   </CustomButton>
-                  <CustomButton
+                  {token.contractAddress && <CustomButton
                     className="ml-4 px-4 py-2 rounded-2xl"
                     onClick={() =>
                       window.open(
-                        `https://dexscreener.com/base/${token.poolAddress}`,
+                        `https://dexscreener.com/bsc/${token.poolAddress}`,
                         "_blank"
                       )
                     }
@@ -175,7 +198,7 @@ export default function TokenPage() {
                       <Chart />
                       <span className="ml-2">Chart</span>
                     </div>
-                  </CustomButton>
+                  </CustomButton>}
                 </div>
               </BoxInfo>
             </Col>
@@ -192,15 +215,15 @@ export default function TokenPage() {
                       {token.name} ({token.symbol})
                     </div>
                     <div>
-                      <Address className="text-[#656565]">
+                      {token.contractAddress && <Address className="text-[#656565]">
                         Address:{" "}
                         <a
                           target="_blank"
-                          href={`https://basescan.org/address/${token.contractAddress}`}
+                          href={`https://bscscan.org/address/${token.contractAddress}`}
                         >
                           {getFirstAndLastString(token.contractAddress)}
                         </a>
-                      </Address>
+                      </Address>}
                     </div>
                   </div>
                 </div>
@@ -260,7 +283,7 @@ export default function TokenPage() {
                   borderRadius: "20px",
                   overflow: "hidden",
                 }}
-                src={`https://dexscreener.com/base/${token?.poolAddress}?embed=1&loadChartSettings=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`}
+                src={`https://dexscreener.com/bsc/${token?.poolAddress}?embed=1&loadChartSettings=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`}
               />
             </div>
           )}
@@ -283,7 +306,7 @@ export default function TokenPage() {
                           Address:{" "}
                           <a
                             target="_blank"
-                            href={`https://basescan.org/address/${token.contractAddress}`}
+                            href={`https://bscscan.com/address/${token.contractAddress}`}
                           >
                             {getFirstAndLastString(token.contractAddress)}
                           </a>
@@ -334,11 +357,11 @@ export default function TokenPage() {
                         </div>
                       </Link>
                     </CustomButton>
-                    <CustomButton
+                    {token.contractAddress && <CustomButton
                       className="ml-4 px-4 py-2 rounded-2xl"
                       onClick={() =>
                         window.open(
-                          `https://dexscreener.com/base/${token.poolAddress}`,
+                          `https://dexscreener.com/bsc/${token.poolAddress}`,
                           "_blank"
                         )
                       }
@@ -347,7 +370,7 @@ export default function TokenPage() {
                         <Chart />
                         <span className="ml-2">Chart</span>
                       </div>
-                    </CustomButton>
+                    </CustomButton>}
                   </div>
                 </BoxInfo>
               )}
