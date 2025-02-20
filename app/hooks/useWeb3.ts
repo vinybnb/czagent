@@ -5,7 +5,8 @@
 
 import { useState, useEffect } from "react";
 import Web3 from "web3";
-
+import CONTRACT_ABI from './ABI.json'
+import { CONTRACT_ADDRESS } from "../utils/constants";
 declare global {
   interface Window {
     ethereum?: any;
@@ -14,6 +15,7 @@ declare global {
 
 export const useWeb3 = () => {
   const [web3, setWeb3] = useState<Web3 | null>(null);
+  const [contract, setContract] = useState<any>(null);
   const [account, setAccount] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,6 +23,11 @@ export const useWeb3 = () => {
     if (window.ethereum) {
       const web3Instance = new Web3(window.ethereum);
       setWeb3(web3Instance);
+      const contractInstance = new web3Instance.eth.Contract(
+        CONTRACT_ABI as any,
+        CONTRACT_ADDRESS
+      );
+      setContract(contractInstance);
     }
   }, []);
 
@@ -40,5 +47,8 @@ export const useWeb3 = () => {
     }
   };
 
-  return { web3, account, connectWallet, error };
+  const generateSalt = (name: string,symbol: string,  supply: string) => {
+
+  }
+  return { web3, account, connectWallet, generateSalt, error };
 };
