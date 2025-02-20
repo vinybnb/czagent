@@ -1,6 +1,6 @@
 export const getFirstAndLastString = (str: string): string => {
-  const first = str.substring(0, 12);
-  const last = str.substring(str.length - 12);
+  const first = str.substring(0, 8);
+  const last = str.substring(str.length - 8);
 
   return `${first}...${last}`;
 };

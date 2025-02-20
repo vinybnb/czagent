@@ -109,14 +109,22 @@ export const ButtonGuide = styled.button`
   border: 2px solid;
   border-radius: 15px;
   color: #000;
-  height: 100%;
-  padding: 0 20px;
+  padding: 12px 20px;
   font-weight: 600;
   font-size: 16px;
+
+  @media (max-width: 768px) {
+    padding: 8px 20px;
+    font-size: 12px;
+    margin-right: 10px;
+  }
 `;
 
 export const WrapperRight = styled.div`
   margin-left: 20px;
+  @media (max-width: 768px) {
+    margin-left: 0px;
+  }
   // overflow-y: scroll;
   // max-height: calc(100vh - 280px);
 
@@ -217,11 +225,9 @@ export const ListItem = styled.div`
   //   }
   // }
 
-  // @media (max-width: 768px) {
-  //   padding-right: 10px;
-  //   width: 100%;
-  //   max-height: calc(100vh - 345px);
-  // }
+  @media (max-width: 768px) {
+    padding-right: 0px;
+  }
 `;
 
 export const CustomAvatar = styled(Avatar)`

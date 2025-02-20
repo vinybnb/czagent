@@ -40,6 +40,12 @@ export default function TokenPage() {
   const [token, setToken] = useState<TokenData | undefined>(undefined);
   const [item, setItem] = useState<Item>("chart");
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log(top);
+    setTimeout(() => setLoading(false), 1000); // Simulating loading
+  }, []);
 
   // const [cap, setCap] = useState(0);
   const [search, setSearch] = useState("");
@@ -70,7 +76,9 @@ export default function TokenPage() {
     setItem(item);
   };
 
-  return (
+  return loading ? (
+    <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
+  ) : (
     <Layout>
       <div className="sticky top-0 z-100 items-center flex justify-center bg-[#1a1a1a] py-2">
         <div className="md:w-4/5 w-full p-2">

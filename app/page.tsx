@@ -13,11 +13,10 @@ import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { Chart, IconSearch, World } from "@/public/elements/icon";
+import { Chart, IconMenu, IconSearch, World } from "@/public/elements/icon";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Marquee from "react-fast-marquee";
-import HowItWorks from "./components/HowItWorks";
 import useIsMobile from "./hooks/useIsMobile";
 import {
   Address,
@@ -39,6 +38,7 @@ import useDebounce from "./hooks/useDebounce";
 import axios from "axios";
 import { API_ENDPOINT } from "./utils/constants";
 import { defaultData } from "./hooks/data";
+import Menu from "./components/Menu";
 import { useWeb3 } from "./hooks/useWeb3";
 
 export type TokenData = {
@@ -100,6 +100,7 @@ export default function Dashboard() {
   const [sort, setSort] = useState("desc");
   const [search, setSearch] = useState("");
   const debouncedValue = useDebounce(search, 500);
+  const [isOpened, setIsOpened] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
@@ -108,8 +109,6 @@ export default function Dashboard() {
     setCurrentPage(1);
     setTimeout(() => setLoading(false), 1000); // Simulating loading
   }, []);
-
-  const [showModal, setShowModal] = useState<boolean>(false);
 
   const isMobile = useIsMobile();
 
@@ -162,13 +161,19 @@ export default function Dashboard() {
   //   setCurrentPage(current);
   //   console.log(pageSize, current);
   // };
+
+  const handleToggleMenu = () => {
+    setIsOpened(!isOpened);
+  };
   return (
-    <div>
+    <div className="relative">
+      <Menu isOpen={isOpened} setIsOpen={setIsOpened} />
+
       {loading ? (
         <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
       ) : (
         <div className="min-h-screen bg-[#1a1a1a]">
-          <div className="sticky top-0 z-40 items-center flex justify-center bg-[#1a1a1a] py-2">
+          <div className="sticky top-0 z-40 items-center flex justify-center bg-[#1a1a1a]">
             <div className="md:w-4/5 w-full p-2">
               <Row>
                 <Col
@@ -200,6 +205,9 @@ export default function Dashboard() {
                     >
                       Create Agent
                     </ButtonGuide>
+                    <button onClick={handleToggleMenu}>
+                      <IconMenu />
+                    </button>
                   </Col>
                 )}
                 <Col span={24} md={14}>
@@ -327,15 +335,12 @@ export default function Dashboard() {
               <Row justify="space-between" className="md:mt-5 mt-2">
                 <Col span={24} md={14}>
                   <ListItem>
-                    {tokens.map((token: TokenData, index: number) => (
-                      <>
-                        <Row
-                          key={index}
-                          className="bg-[#1f1f1f] sm:px-5 px-2 md:py-3 pt-2 text-white rounded-lg mb-4 shadow transition-transform duration-300 hover:scale-x-95 hover:shadow-lg hover:z-20 cursor-pointer hover:border-[2px] hover:border-[#30E000]"
-                        >
-                          <Col span={14}>
-                            <Row>
-                              <Col md={4} span={5}>
+                    {tokens.map((token: TokenData) => (
+                      <div key={token.hash}>
+                        <Row className="bg-[#1f1f1f] flex justify-between sm:px-5 px-2 md:py-3 pt-2 text-white rounded-lg mb-4 shadow transition-transform duration-300 hover:scale-x-95 hover:shadow-lg hover:z-20 cursor-pointer hover:border-[2px] hover:border-[#30E000]">
+                          <Col>
+                            <Row className="flex">
+                              <Col className="mr-2">
                                 <Avatar
                                   src={token.image || null}
                                   shape="square"
@@ -344,15 +349,15 @@ export default function Dashboard() {
                                   {token.symbol}
                                 </Avatar>
                               </Col>
-                              <Col
-                                md={20}
-                                span={19}
-                                className="flex justify-center flex-col"
-                              >
+                              <Col className="flex justify-center flex-col">
                                 <div className="text-xs md:text-lg font-bold">
                                   {token.name} ({token.symbol})
+                                </div>
+                                <div>
                                   {!token.contractAddress && (
-                                    <Tag color="#f50">Not Deployed</Tag>
+                                    <Tag className="md:ml-2 mt-2" color="#f50">
+                                      Not Deployed
+                                    </Tag>
                                   )}
                                 </div>
                                 <div>
@@ -373,8 +378,8 @@ export default function Dashboard() {
                               </Col>
                             </Row>
                             {!isMobile && (
-                              <Row justify="space-between" className="mt-4">
-                                <Col span={6}>
+                              <Row className="mt-2">
+                                <Col className="mr-2">
                                   <CustomButton className="px-2 py-1 rounded-2xl">
                                     <Link
                                       href={`${token.messageUrl}`}
@@ -388,7 +393,7 @@ export default function Dashboard() {
                                   </CustomButton>
                                 </Col>
                                 {token.contractAddress && (
-                                  <Col span={6}>
+                                  <Col className="mr-8">
                                     <CustomButton
                                       className="px-2 py-1 rounded-2xl"
                                       onClick={() =>
@@ -405,8 +410,8 @@ export default function Dashboard() {
                                     </CustomButton>
                                   </Col>
                                 )}
-                                <Col span={12}>
-                                  <CustomButton className="py-2 px-3 bg-[#FFCC00] rounded-[20px] text-black">
+                                <Col>
+                                  <CustomButton className="py-1 px-3 bg-[#FFCC00] rounded-[20px] text-black">
                                     <Link href={`/agent/${token.tokenId}`}>
                                       View Detail
                                     </Link>
@@ -416,10 +421,7 @@ export default function Dashboard() {
                             )}
                           </Col>
 
-                          <Col
-                            span={10}
-                            className="justify-center items-center gap-2 flex flex-col"
-                          >
+                          <Col className="justify-center items-center gap-2 flex flex-col">
                             <Row className="flex items-center justify-center">
                               <div className="text-xs md:text-base px-2 py-1 md:px-5 md:py-2 border-[#5F5F5F] border-[1px]  w-fit rounded-[100px] truncate">
                                 {token.usernameDisplay}
@@ -434,9 +436,9 @@ export default function Dashboard() {
                           {isMobile && (
                             <Row
                               justify="space-between"
-                              className="mb-6 mt-3 flex items-center gap-2"
+                              className="mb-6 mt-3 flex items-center gap-2 w-full"
                             >
-                              <Col span={6} className="mr-3">
+                              <Col className="mr-3">
                                 <CustomButton className="rounded-2xl px-2 py-1 ">
                                   <Link
                                     href={`${token.messageUrl}`}
@@ -448,9 +450,8 @@ export default function Dashboard() {
                                     </div>
                                   </Link>
                                 </CustomButton>
-                              </Col>
-                              {token.contractAddress && (
-                                <Col span={6} className="flex justify-end">
+
+                                {token.contractAddress && (
                                   <CustomButton
                                     className="rounded-2xl px-2 py-1"
                                     onClick={() =>
@@ -465,9 +466,10 @@ export default function Dashboard() {
                                       <span className="ml-2">Chart</span>
                                     </div>
                                   </CustomButton>
-                                </Col>
-                              )}
-                              <Col span={9} className="flex justify-end">
+                                )}
+                              </Col>
+
+                              <Col className="flex justify-end">
                                 <ButtonDetail className="py-2 px-3 bg-[#FFCC00] rounded-[20px] text-black">
                                   {" "}
                                   <Link href={`/agent/${token.tokenId}`}>
@@ -478,7 +480,7 @@ export default function Dashboard() {
                             </Row>
                           )}
                         </Row>
-                      </>
+                      </div>
                     ))}
                   </ListItem>
                   <div className="flex flex-col md:justify-start justify-center mt-2 md:mt-8">
@@ -491,10 +493,6 @@ export default function Dashboard() {
                     showSizeChanger={false}
                   />
                 )} */}
-                    <span className="text-white text-[px] pt-3 pl-10">
-                      {/* Copyright © czagents.fun */}
-                      Copyright © CZ Agents
-                    </span>
                   </div>
                 </Col>
 
@@ -561,8 +559,14 @@ export default function Dashboard() {
               </Row>
             </div>
           </div>
+          <div className="w-full flex justify-center mt-3">
+            <span className="text-white ">
+              {/* Copyright © czagents.fun */}
+              Copyright © CZ Agents
+            </span>
+          </div>
 
-          <HowItWorks showModal={showModal} setShowModal={setShowModal} />
+          {/* <HowItWorks showModal={showModal} setShowModal={setShowModal} /> */}
         </div>
       )}
     </div>
