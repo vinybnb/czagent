@@ -91,8 +91,6 @@ type TopInfoCache = {
 
 export default function Dashboard() {
   const { account, connectWallet } = useWeb3();
-  console.log("account", account);
-
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [tokens, setTokens] = useState([]);
@@ -130,8 +128,6 @@ export default function Dashboard() {
       chain: 8453,
       sort,
     });
-    console.log(response.data);
-
     setTokens(response.data.length ? response.data : defaultData);
   };
 

@@ -1,10 +1,12 @@
+/** @format */
+
 "use client";
 
 import { useParams } from "next/navigation";
 import { Row, Col, Avatar, Layout, Button } from "antd";
 const { Content } = Layout;
 import { RocketOutlined, UserOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
@@ -27,21 +29,30 @@ import {
   IconSearch,
   World,
 } from "@/public/elements/icon";
-import { getFirstAndLastString } from "@/app/utils/helper";
+import { getFirstAndLastString, getShortenedAddress } from "@/app/utils/helper";
 import HowItWorks from "@/app/components/HowItWorks";
 import { API_ENDPOINT } from "@/app/utils/constants";
+import { useWeb3 } from "@/app/hooks/useWeb3";
 
 type Item = "buy/sell" | "chart" | "info";
-
+type DeployTokenInfoType = {
+  name: string;
+  symbol: string;
+  supply: number;
+  initialTick: number;
+  fee: number;
+  id: string;
+  salt: string;
+};
 export default function TokenPage() {
   // Get the address from the URL
   const isMobile = useIsMobile();
-
+  const { account, connectWallet, generateSalt, deployToken } = useWeb3();
   const [token, setToken] = useState<TokenData | undefined>(undefined);
   const [item, setItem] = useState<Item>("chart");
   const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
-
+  const deployTokenInfo = useRef<DeployTokenInfoType | undefined>();
   useEffect(() => {
     console.log(top);
     setTimeout(() => setLoading(false), 1000); // Simulating loading
@@ -51,7 +62,6 @@ export default function TokenPage() {
   const [search, setSearch] = useState("");
 
   const params = useParams();
-  console.log("params", params);
   useEffect(() => {
     (async () => {
       const { address } = params;
@@ -67,15 +77,48 @@ export default function TokenPage() {
       // if (data.pairs && data.pairs.length) {
       //   setCap(data.pairs[0].marketCap);
       // }
-      console.log("tokenRes", tokenRes.data);
+      const tokenDetail = tokenRes.data;
+      if (tokenDetail && account) {
+        const saltData = await generateSalt(
+          account,
+          tokenDetail.name,
+          tokenDetail.symbol,
+          tokenDetail.supply
+        );
+        deployTokenInfo.current = {
+          name: tokenDetail.name,
+          symbol: tokenDetail.symbol,
+          id: tokenDetail.tokenId,
+          supply: 1000000000000000000000000,
+          fee: 10000,
+          initialTick: -140000,
+          salt: saltData?.salt,
+        };
+        console.log("salt", saltData);
+      }
       setToken(tokenRes.data);
     })();
-  }, [params]);
+  }, [params, account]);
 
   const onChange = (item: Item) => {
     setItem(item);
   };
 
+  const handleDeployToken = async () => {
+    const deployInfo = deployTokenInfo.current;
+    if (deployInfo) {
+      const resultDeploy = await deployToken(
+        deployInfo.name,
+        deployInfo.symbol,
+        deployInfo.supply,
+        deployInfo.initialTick,
+        deployInfo.fee,
+        deployInfo.salt,
+        deployInfo.id
+      );
+      console.log("resultDeploy", resultDeploy);
+    }
+  };
   return loading ? (
     <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
   ) : (
@@ -120,6 +163,11 @@ export default function TokenPage() {
               <Col span={24} md={4} className="flex justify-end items-center">
                 <ButtonGuide onClick={() => setShowModal(true)}>
                   <span className="font-bold">Create Agent</span>
+                </ButtonGuide>
+                <ButtonGuide onClick={connectWallet}>
+                  <span className="font-bold">
+                    {account ? getShortenedAddress(account) : "Connect wallet"}
+                  </span>
                 </ButtonGuide>
               </Col>
             )}
@@ -170,6 +218,7 @@ export default function TokenPage() {
                         fontSize: "1.5rem",
                         padding: "30px 20px",
                       }}
+                      onClick={handleDeployToken}
                     >
                       <RocketOutlined></RocketOutlined>
                       Launch {token.symbol}

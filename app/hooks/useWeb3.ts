@@ -1,4 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * eslint-disable @typescript-eslint/no-explicit-any
+ *
+ * @format
+ */
+
 /** @format */
 
 "use client";
@@ -20,11 +25,17 @@ export const useWeb3 = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const savedAccount = localStorage.getItem("walletAddress");
+    if (savedAccount) {
+      setAccount(savedAccount);
+    }
+  }, []);
+  useEffect(() => {
     if (window.ethereum) {
       const web3Instance = new Web3(window.ethereum);
       setWeb3(web3Instance);
       const contractInstance = new web3Instance.eth.Contract(
-        CONTRACT_ABI as any,
+        CONTRACT_ABI,
         CONTRACT_ADDRESS
       );
       setContract(contractInstance);
@@ -33,7 +44,6 @@ export const useWeb3 = () => {
 
   const connectWallet = async () => {
     if (!window.ethereum) {
-      console.log(contract);
       return;
     }
 
@@ -42,14 +52,67 @@ export const useWeb3 = () => {
         method: "eth_requestAccounts",
       });
       setAccount(accounts[0]);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      localStorage.setItem("walletAddress", accounts[0]);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     } catch (error: any) {
+      console.log(error);
+
       setError(error);
     }
   };
 
-  const generateSalt = (name: string, symbol: string, supply: string) => {
-    console.log(name, symbol, supply);
+  const disconnectWallet = () => {
+    setAccount(null);
+    localStorage.removeItem("walletAddress");
   };
-  return { web3, account, connectWallet, generateSalt, error };
+  const generateSalt = async (
+    deployer: string,
+    name: string,
+    symbol: string,
+    supply: string
+  ) => {
+    if (!contract) return;
+    const result = await contract.methods
+      .generateSalt(deployer, name, symbol, supply)
+      .call();
+    return {
+      salt: result.salt,
+      token: result.token,
+    };
+  };
+  const deployToken = async (
+    name: string,
+    symbol: string,
+    supply: number,
+    initialTick: number,
+    fee: number,
+    salt: string,
+    id: string
+  ) => {
+    if (!contract) return null;
+
+    try {
+      const result = await contract.methods
+        .deployToken(name, symbol, supply, initialTick, fee, salt, id)
+        .send({ from: account });
+
+      return {
+        token: result.events.TokenDeployed.returnValues.token,
+        tokenId: Number(result.events.TokenDeployed.returnValues.tokenId),
+      };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
+  return {
+    web3,
+    account,
+    connectWallet,
+    generateSalt,
+    error,
+    disconnectWallet,
+    deployToken,
+  };
 };
