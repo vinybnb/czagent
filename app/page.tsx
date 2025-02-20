@@ -39,6 +39,7 @@ import useDebounce from "./hooks/useDebounce";
 import axios from "axios";
 import { API_ENDPOINT } from "./utils/constants";
 import { defaultData } from "./hooks/data";
+import { useWeb3 } from "./hooks/useWeb3";
 
 export type TokenData = {
   tokenId: string;
@@ -89,6 +90,9 @@ type TopInfoCache = {
 };
 
 export default function Dashboard() {
+  const { account, connectWallet } = useWeb3();
+  console.log("account", account);
+
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [tokens, setTokens] = useState([]);
@@ -218,7 +222,8 @@ export default function Dashboard() {
                     className="flex justify-end items-center"
                   >
                     <ButtonGuide
-                      onClick={() => router.push("https://x.com/czagents")}
+                      // onClick={() => router.push("https://x.com/czagents")}
+                      onClick={connectWallet}
                     >
                       <span className="font-bold">Create Agent</span>
                     </ButtonGuide>
@@ -260,7 +265,11 @@ export default function Dashboard() {
                 </Marquee>
               </div>
               <div className="flex justify-between w-full">
-                <Col  span={24} md={14} className="w-full flex justify-between pr-5">
+                <Col
+                  span={24}
+                  md={14}
+                  className="w-full flex justify-between pr-5"
+                >
                   <div>
                     <TotalToken className="w-fit px-4 py-2 md:px-4 md:py-2 text-xs md:text-lg font-semibold truncate text-black">
                       {tokens.length} agents deployed
@@ -361,7 +370,10 @@ export default function Dashboard() {
                               <Row justify="space-between" className="mt-4">
                                 <Col span={6}>
                                   <CustomButton className="px-2 py-1 rounded-2xl">
-                                    <Link href={`${token.messageUrl}`} target="_blank">
+                                    <Link
+                                      href={`${token.messageUrl}`}
+                                      target="_blank"
+                                    >
                                       <div className="flex items-center">
                                         <World />
                                         <span className="ml-2">Website</span>
