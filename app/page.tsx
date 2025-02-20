@@ -474,7 +474,8 @@ export default function Dashboard() {
                   />
                 )} */}
                     <span className="text-white text-[px] pt-3 pl-10">
-                      Copyright © czagents.fun
+                      {/* Copyright © czagents.fun */}
+                      Copyright © CZ Agents
                     </span>
                   </div>
                 </Col>
