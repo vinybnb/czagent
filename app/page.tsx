@@ -34,7 +34,7 @@ import {
   TotalToken,
   WrapperRight,
 } from "./styled";
-import { getFirstAndLastString } from "./utils/helper";
+import { getFirstAndLastString, getShortenedAddress } from "./utils/helper";
 import useDebounce from "./hooks/useDebounce";
 import axios from "axios";
 import { API_ENDPOINT } from "./utils/constants";
@@ -202,7 +202,7 @@ export default function Dashboard() {
                     </ButtonGuide>
                   </Col>
                 )}
-                <Col span={24} md={16}>
+                <Col span={24} md={14}>
                   <SearchBox>
                     <IconSearch />
                     <InputSearch
@@ -218,14 +218,20 @@ export default function Dashboard() {
                 {!isMobile && (
                   <Col
                     span={24}
-                    md={4}
+                    md={6}
                     className="flex justify-end items-center"
                   >
                     <ButtonGuide
-                      // onClick={() => router.push("https://x.com/czagents")}
-                      onClick={connectWallet}
+                      onClick={() => router.push("https://x.com/czagents")}
                     >
                       <span className="font-bold">Create Agent</span>
+                    </ButtonGuide>
+                    <ButtonGuide onClick={connectWallet}>
+                      <span className="font-bold">
+                        {account
+                          ? getShortenedAddress(account)
+                          : "Connect wallet"}
+                      </span>
                     </ButtonGuide>
                   </Col>
                 )}

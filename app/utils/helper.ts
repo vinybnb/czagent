@@ -4,3 +4,7 @@ export const getFirstAndLastString = (str: string): string => {
 
   return `${first}...${last}`;
 };
+
+export const getShortenedAddress = (address: string) => {
+  return address?.slice(0, 5) + '...' + address?.slice(-7)
+}
