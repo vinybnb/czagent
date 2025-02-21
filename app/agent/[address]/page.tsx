@@ -4,7 +4,7 @@
 "use client";
 
 import { RocketOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, Layout, Row } from "antd";
+import { Avatar, Button, Col, Dropdown, Layout, Row, } from "antd";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +34,7 @@ import {
   IconMenu,
 } from "@/public/elements/icon";
 import { useRouter } from "next/navigation";
-import Menu from "@/app/components/Menu";
+import MenuBar from "@/app/components/Menu";
 import { toast } from "react-toastify";
 
 type Item = "buy/sell" | "chart" | "info";
@@ -148,6 +148,22 @@ export default function TokenPage() {
   const handleToggleMenu = () => {
     setIsOpened(!isOpened);
   };
+  const WalletButton = () => {
+    return (
+      <Dropdown
+        overlay={
+          <div onClick={disconnectWallet} className="bg-[#222222] font-bold text-[#ffffff] cursor-pointer  w-full rounded-lg p-3">
+              Disconnect
+          </div>
+        }
+        trigger={["click"]}
+      >
+        <div className="cursor-pointer font-bold">
+          {getShortenedAddress(account as string)}
+        </div>
+      </Dropdown>
+    );
+  };
   return (
     <div className="relative">
       {isCallCA && (
@@ -155,7 +171,7 @@ export default function TokenPage() {
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       )}
-      <Menu isOpen={isOpened} setIsOpen={setIsOpened} />
+      <MenuBar isOpen={isOpened} setIsOpen={setIsOpened} />
       {loading ? (
         <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
       ) : (
@@ -224,9 +240,7 @@ export default function TokenPage() {
                     </ButtonGuide>
                     <ButtonGuide>
                       {account ? (
-                        <div onClick={disconnectWallet} className="font-bold">
-                          {getShortenedAddress(account)}
-                        </div>
+                        <WalletButton />
                       ) : (
                         <div onClick={connectWallet} className="font-bold">
                           Connect wallet

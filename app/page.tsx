@@ -8,7 +8,7 @@
 
 "use client";
 
-import { Avatar, Col, Row, Tag } from "antd";
+import { Avatar, Col, Dropdown, Row, Tag } from "antd";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -164,6 +164,25 @@ export default function Dashboard() {
   const handleToggleMenu = () => {
     setIsOpened(!isOpened);
   };
+  const WalletButton = () => {
+    return (
+      <Dropdown
+        overlay={
+          <div
+            onClick={disconnectWallet}
+            className="bg-[#222222] font-bold text-[#ffffff] cursor-pointer  w-full rounded-lg p-3"
+          >
+            Disconnect
+          </div>
+        }
+        trigger={["click"]}
+      >
+        <div className="cursor-pointer font-bold">
+          {getShortenedAddress(account as string)}
+        </div>
+      </Dropdown>
+    );
+  };
   return (
     <div className="relative">
       <Menu isOpen={isOpened} setIsOpen={setIsOpened} />
@@ -236,9 +255,7 @@ export default function Dashboard() {
                     </ButtonGuide>
                     <ButtonGuide>
                       {account ? (
-                        <div onClick={disconnectWallet} className="font-bold">
-                          {getShortenedAddress(account)}
-                        </div>
+                        <WalletButton />
                       ) : (
                         <div onClick={connectWallet} className="font-bold">
                           Connect wallet
