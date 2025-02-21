@@ -3,14 +3,7 @@
 
 "use client";
 
-import { RocketOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, Dropdown, Layout, Row } from "antd";
-import axios from "axios";
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-const { Content } = Layout;
+import MenuBar from "@/app/components/Menu";
 import useIsMobile from "@/app/hooks/useIsMobile";
 import { useWeb3 } from "@/app/hooks/useWeb3";
 import { TokenData } from "@/app/page";
@@ -29,12 +22,17 @@ import {
   IconBuySell,
   IconChartBtn,
   IconInfo,
+  IconMenu,
   IconSearch,
   World,
-  IconMenu,
 } from "@/public/elements/icon";
-import { useRouter } from "next/navigation";
-import MenuBar from "@/app/components/Menu";
+import { RocketOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Col, Dropdown, Layout, Row } from "antd";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 type Item = "buy/sell" | "chart" | "info";
@@ -178,9 +176,9 @@ export default function TokenPage() {
         <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
       ) : (
         <Layout>
-          <div className="sticky top-0 z-100 items-center flex justify-center bg-[#1a1a1a] py-2">
-            <div className="md:w-4/5 w-full p-2">
-              <Row>
+          <div className="top-0 fixed items-center flex justify-center bg-[#1a1a1a] py-2 z-20"  >
+            <div className="md:w-4/5 !z-50  w-full p-2">
+              <Row >
                 <Col
                   span={12}
                   md={4}
@@ -254,16 +252,17 @@ export default function TokenPage() {
               </Row>
             </div>
           </div>
-          <Content
+          <div
             style={{
               marginTop: "20px",
               height: isMobile ? "100%" : "calc(100vh - 415px)",
               padding: isMobile ? "0 4px" : "0 80px",
             }}
+            className="z-2"
           >
             {token ? (
-              <Row gutter={8} className="md:flex hidden text-white">
-                <Col span={16}>
+              <Row gutter={8} className="flex  text-white">
+                <Col span={24} md={16}>
                   <div>
                     {token.contractAddress ? (
                       <iframe
@@ -285,10 +284,9 @@ export default function TokenPage() {
                           borderRadius: "20px",
                           overflow: "hidden",
                           position: "relative",
-                          paddingTop: "20%",
-                          left: "40%",
                           // textAlign: 'center'
                         }}
+                        className="flex items-center justify-center"
                       >
                         <Button
                           style={{
@@ -358,7 +356,7 @@ export default function TokenPage() {
                   </BoxInfo>
                 </Col>
 
-                <Col span={8} className="flex flex-col justify-between">
+                <Col span={24} md={8} className="flex flex-col justify-between">
                   <BoxInfo className="truncate">
                     <div className="flex">
                       <Avatar
@@ -420,9 +418,9 @@ export default function TokenPage() {
                 <span>Token not found !</span>
               </div>
             )}
-          </Content>
+          </div>
 
-          <div className="flex md:hidden">
+          <div className="flex z-10 md:hidden">
             <Row className="text-black w-full px-2">
               {item == "buy/sell" && (
                 <div className="w-full">
