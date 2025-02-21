@@ -99,6 +99,7 @@ export default function TokenPage() {
       }
       setToken(tokenRes.data);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params, account]);
 
   const onChange = (item: Item) => {

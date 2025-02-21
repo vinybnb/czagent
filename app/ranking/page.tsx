@@ -96,6 +96,7 @@ export default function Ranking() {
     console.log(top);
     setCurrentPage(1);
     setTimeout(() => setLoading(false), 1000); // Simulating loading
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderRank = (index: number) => {
@@ -128,6 +129,7 @@ export default function Ranking() {
 
       fetchTokens();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, sort, search, debouncedValue]);
 
   useEffect(() => {
@@ -138,6 +140,7 @@ export default function Ranking() {
     };
 
     fetchTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort, currentPage]);
 
   // const onChangePage: PaginationProps["onShowSizeChange"] = (

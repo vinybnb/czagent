@@ -106,6 +106,7 @@ export default function Dashboard() {
     console.log(top);
     setCurrentPage(1);
     setTimeout(() => setLoading(false), 1000); // Simulating loading
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isMobile = useIsMobile();
@@ -138,6 +139,7 @@ export default function Dashboard() {
 
       fetchTokens();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, sort, search, debouncedValue]);
 
   useEffect(() => {
@@ -148,6 +150,7 @@ export default function Dashboard() {
     };
 
     fetchTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort, currentPage]);
 
   // const onChangePage: PaginationProps["onShowSizeChange"] = (
@@ -183,7 +186,7 @@ export default function Dashboard() {
                       width={60}
                       height={60}
                       alt="logo"
-                       className="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px]"
+                      className="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px]"
                     />
                     <span className="text-white font-bold text-xl">
                       CZ AGENTS
