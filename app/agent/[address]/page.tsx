@@ -176,7 +176,7 @@ export default function TokenPage() {
         <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
       ) : (
         <Layout>
-          <div className="top-0 fixed items-center flex justify-center bg-[#1a1a1a] py-2 z-20"  >
+          <div className="top-0 sticky items-center flex justify-center bg-[#1a1a1a] py-2 z-20"  >
             <div className="md:w-4/5 !z-50  w-full p-2">
               <Row >
                 <Col
