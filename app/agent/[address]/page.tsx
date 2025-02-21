@@ -4,7 +4,7 @@
 "use client";
 
 import { RocketOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, Dropdown, Layout, Row, } from "antd";
+import { Avatar, Button, Col, Dropdown, Layout, Row } from "antd";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -105,7 +105,6 @@ export default function TokenPage() {
           initialTick: -140000,
           salt: saltData?.salt,
         };
-        console.log("salt", saltData);
       }
       setToken(tokenRes.data);
     })();
@@ -152,8 +151,11 @@ export default function TokenPage() {
     return (
       <Dropdown
         overlay={
-          <div onClick={disconnectWallet} className="bg-[#222222] font-bold text-[#ffffff] cursor-pointer  w-full rounded-lg p-3">
-              Disconnect
+          <div
+            onClick={disconnectWallet}
+            className="bg-[#222222] font-bold text-[#ffffff] cursor-pointer  w-full rounded-lg p-3"
+          >
+            Disconnect
           </div>
         }
         trigger={["click"]}
