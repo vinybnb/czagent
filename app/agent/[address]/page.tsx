@@ -55,6 +55,7 @@ export default function TokenPage() {
   const [isOpened, setIsOpened] = useState(false);
   const [loading, setLoading] = useState(true);
   const deployTokenInfo = useRef<DeployTokenInfoType | undefined>();
+  const [isCallCA, setIsCallCA] = useState<boolean>(false);
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000); // Simulating loading
   }, []);
@@ -107,8 +108,12 @@ export default function TokenPage() {
   };
 
   const handleDeployToken = async () => {
-    const deployInfo = deployTokenInfo.current;
-    if (deployInfo) {
+    if (!deployTokenInfo.current) {
+      return;
+    }
+    setIsCallCA(true);
+    try {
+      const deployInfo = deployTokenInfo.current;
       const resultDeploy = await deployToken(
         deployInfo.name,
         deployInfo.symbol,
@@ -118,14 +123,26 @@ export default function TokenPage() {
         deployInfo.salt,
         deployInfo.id
       );
-      console.log("resultDeploy", resultDeploy);
+      console.log("✅ Deployment successful:", resultDeploy);
+      setTimeout(() => {
+        window.location.reload();
+      }, 10000);
+    } catch (error) {
+      setIsCallCA(false);
+      console.error("❌ Deployment failed:", error);
     }
   };
+
   const handleToggleMenu = () => {
     setIsOpened(!isOpened);
   };
   return (
     <div className="relative">
+      {isCallCA && (
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
+        </div>
+      )}
       <Menu isOpen={isOpened} setIsOpen={setIsOpened} />
       {loading ? (
         <div className="fixed top-0 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
@@ -539,9 +556,12 @@ export default function TokenPage() {
               </Row>
             </Row>
           </div>
-          {/* <Footer className='h-2 flex justify-center bg-[#d6eeff] text-md'>
-        Copyright © Tokenfather.io
-      </Footer> */}
+          <div className="w-full flex justify-center mt-3">
+            <span className="text-white ">
+              {/* Copyright © czagents.fun */}
+              Copyright © CZ Agents
+            </span>
+          </div>
         </Layout>
       )}
     </div>
