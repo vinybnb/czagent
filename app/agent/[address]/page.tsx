@@ -49,7 +49,14 @@ export default function TokenPage() {
   // Get the address from the URL
   const isMobile = useIsMobile();
   const router = useRouter();
-  const { account, connectWallet, generateSalt, deployToken , checkWalletConnection} = useWeb3();
+  const {
+    account,
+    connectWallet,
+    generateSalt,
+    deployToken,
+    checkWalletConnection,
+    disconnectWallet,
+  } = useWeb3();
   const [token, setToken] = useState<TokenData | undefined>(undefined);
   const [item, setItem] = useState<Item>("chart");
   const [isOpened, setIsOpened] = useState(false);
@@ -108,7 +115,7 @@ export default function TokenPage() {
   };
 
   const handleDeployToken = async () => {
-    checkWalletConnection()
+    checkWalletConnection();
     if (!deployTokenInfo.current) {
       return;
     }
@@ -211,12 +218,16 @@ export default function TokenPage() {
                     >
                       <span className="font-bold">Create Agent</span>
                     </ButtonGuide>
-                    <ButtonGuide onClick={connectWallet}>
-                      <span className="font-bold">
-                        {account
-                          ? getShortenedAddress(account)
-                          : "Connect wallet"}
-                      </span>
+                    <ButtonGuide>
+                      {account ? (
+                        <div onClick={disconnectWallet} className="font-bold">
+                          {getShortenedAddress(account)}
+                        </div>
+                      ) : (
+                        <div onClick={connectWallet} className="font-bold">
+                          Connect wallet
+                        </div>
+                      )}
                     </ButtonGuide>
                   </Col>
                 )}

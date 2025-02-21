@@ -90,7 +90,7 @@ type TopInfoCache = {
 };
 
 export default function Dashboard() {
-  const { account, connectWallet } = useWeb3();
+  const { account, connectWallet, disconnectWallet } = useWeb3();
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [tokens, setTokens] = useState([]);
@@ -234,12 +234,16 @@ export default function Dashboard() {
                     >
                       <span className="font-bold">Create Agent</span>
                     </ButtonGuide>
-                    <ButtonGuide onClick={connectWallet}>
-                      <span className="font-bold">
-                        {account
-                          ? getShortenedAddress(account)
-                          : "Connect wallet"}
-                      </span>
+                    <ButtonGuide>
+                      {account ? (
+                        <div onClick={disconnectWallet} className="font-bold">
+                          {getShortenedAddress(account)}
+                        </div>
+                      ) : (
+                        <div onClick={connectWallet} className="font-bold">
+                          Connect wallet
+                        </div>
+                      )}
                     </ButtonGuide>
                   </Col>
                 )}
