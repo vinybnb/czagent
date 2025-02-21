@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import CONTRACT_ABI from "./ABI.json";
 import { CONTRACT_ADDRESS } from "../utils/constants";
-import { message } from "antd";
+import { toast } from "react-toastify";
 declare global {
   interface Window {
     ethereum?: any;
@@ -46,7 +46,7 @@ export const useWeb3 = () => {
 
   const checkWalletConnection = async () => {
     if (typeof window === "undefined" || !window.ethereum) {
-      message.error("🚨 MetaMask not detected! Please install it.");
+      toast.error("🚨 MetaMask not detected! Please install it.");
       return null;
     }
 
@@ -55,7 +55,7 @@ export const useWeb3 = () => {
       const accounts = await web3.eth.getAccounts();
 
       if (accounts.length === 0) {
-        message.error("🛑 Please connect your wallet!");
+        toast.error("🛑 Please connect your wallet!");
         return null;
       }
       setAccount(accounts[0]);
@@ -63,7 +63,7 @@ export const useWeb3 = () => {
       return accounts[0];
     } catch (error) {
       console.error("❌ Error checking wallet:", error);
-      message.error("❌ Failed to check wallet. Please try again!");
+      toast.error("❌ Failed to check wallet. Please try again!");
       return null;
     }
   };
@@ -114,7 +114,6 @@ export const useWeb3 = () => {
     salt: string,
     id: string
   ) => {
-    await checkWalletConnection();
     if (!contract) return null;
 
     try {
@@ -145,5 +144,6 @@ export const useWeb3 = () => {
     error,
     disconnectWallet,
     deployToken,
+    checkWalletConnection
   };
 };

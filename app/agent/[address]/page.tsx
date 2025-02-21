@@ -49,7 +49,7 @@ export default function TokenPage() {
   // Get the address from the URL
   const isMobile = useIsMobile();
   const router = useRouter();
-  const { account, connectWallet, generateSalt, deployToken } = useWeb3();
+  const { account, connectWallet, generateSalt, deployToken , checkWalletConnection} = useWeb3();
   const [token, setToken] = useState<TokenData | undefined>(undefined);
   const [item, setItem] = useState<Item>("chart");
   const [isOpened, setIsOpened] = useState(false);
@@ -108,6 +108,7 @@ export default function TokenPage() {
   };
 
   const handleDeployToken = async () => {
+    checkWalletConnection()
     if (!deployTokenInfo.current) {
       return;
     }
