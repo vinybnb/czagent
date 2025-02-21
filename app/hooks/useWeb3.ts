@@ -92,6 +92,11 @@ export const useWeb3 = () => {
     if (!contract) return null;
 
     try {
+      const simulationResult = await contract.method
+        .deployToken(name, symbol, supply, initialTick, fee, salt, id)
+        .estimateGas({ from: account });
+      console.log("simulationResult", simulationResult);
+
       const result = await contract.methods
         .deployToken(name, symbol, supply, initialTick, fee, salt, id)
         .send({ from: account });

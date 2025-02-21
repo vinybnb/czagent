@@ -24,7 +24,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, setIsOpen }) => {
 
   return (
     isOpen && (
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[#000000E0] z-50 pl-5">
+      <div className="fixed top-0 right-0 w-1/2 h-1/2 bg-[#000000E0] z-50 pl-5">
         <div className="flex justify-end mt-6 mr-2">
           <button onClick={() => setIsOpen(!isOpen)}>
             <IconClose />

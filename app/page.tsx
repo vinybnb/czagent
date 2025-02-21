@@ -175,14 +175,15 @@ export default function Dashboard() {
                 <Col
                   span={12}
                   md={4}
-                  className="flex justify-start items-center"
+                  className="flex justify-start items-center mb-3 sm:mb-0"
                 >
-                  <Link href="/" className="flex items-center gap-3">
+                  <Link href="/" className="flex items-center gap-3 ">
                     <Image
                       src="/images/logo/logo.png"
                       width={60}
                       height={60}
                       alt="logo"
+                       className="sm:w-[60px] sm:h-[60px] w-[40px] h-[40px]"
                     />
                     <span className="text-white font-bold text-xl">
                       CZ AGENTS
@@ -561,8 +562,6 @@ export default function Dashboard() {
               Copyright © CZ Agents
             </span>
           </div>
-
-          {/* <HowItWorks showModal={showModal} setShowModal={setShowModal} /> */}
         </div>
       )}
     </div>
