@@ -130,7 +130,8 @@ export const useWeb3 = () => {
         token: result.events.TokenDeployed.returnValues.token,
         tokenId: Number(result.events.TokenDeployed.returnValues.tokenId),
       };
-    } catch (error) {
+    } catch (error: any) {
+      toast.error(error);
       console.error(error);
       return null;
     }
@@ -144,6 +145,6 @@ export const useWeb3 = () => {
     error,
     disconnectWallet,
     deployToken,
-    checkWalletConnection
+    checkWalletConnection,
   };
 };

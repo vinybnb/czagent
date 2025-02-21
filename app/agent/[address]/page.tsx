@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /** @format */
 
 "use client";
@@ -34,6 +35,7 @@ import {
 } from "@/public/elements/icon";
 import { useRouter } from "next/navigation";
 import Menu from "@/app/components/Menu";
+import { toast } from "react-toastify";
 
 type Item = "buy/sell" | "chart" | "info";
 type DeployTokenInfoType = {
@@ -131,13 +133,15 @@ export default function TokenPage() {
         deployInfo.salt,
         deployInfo.id
       );
-      console.log("✅ Deployment successful:", resultDeploy);
-      setTimeout(() => {
-        window.location.reload();
-      }, 10000);
-    } catch (error) {
+      if (resultDeploy?.token && resultDeploy?.tokenId) {
+        console.log("✅ Deployment successful:", resultDeploy);
+        setTimeout(() => {
+          window.location.reload();
+        }, 10000);
+      }
+    } catch (error: any) {
       setIsCallCA(false);
-      console.error("❌ Deployment failed:", error);
+      toast.error("❌ Deployment failed:", error);
     }
   };
 
