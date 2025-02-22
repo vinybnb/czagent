@@ -589,7 +589,7 @@ export default function TokenPage() {
           <div className="w-full flex justify-center mt-3">
             <span className="text-white ">
               {/* Copyright © czagents.fun */}
-              Copyright © CZ Agents
+              {/* Copyright © CZ Agents */}
             </span>
           </div>
         </Layout>
